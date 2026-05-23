@@ -5,11 +5,17 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+  workflow_dispatch:
 
 jobs:
   test:
     runs-on: [self-hosted, brainsait]
     steps:
       - uses: actions/checkout@v4
+      - name: System info
+        run: |
+          uname -a
+          docker --version
+          free -h
       - name: Run a test
-        run: echo "Hello from brainsait runner"
+        run: echo "Hello from brainsait runner - CI passed!"
