@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PulseForge — Vol. 01 · Cardiology · BrainSAIT</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel=\"stylesheet\" href=\"assets/styles.min.css\">
+    <link rel="stylesheet" href="assets/styles.css">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;700&family=JetBrains+Mono:wght@300;400;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root { --midnight:#0a0f1e; --deep-navy:#0d1529; --signal-teal:#00c9b8; --ecg-green:#00ff88; --cream:#f5f0e8; --gold:#c9a84c; --accent:#c0183e; --glass:rgba(255,255,255,0.03); }
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { background:var(--midnight); color:var(--cream); font-family:'Cormorant Garamond',serif; overflow-x:hidden; }
+body::before { content:''; position:fixed; inset:0; z-index:0; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='512' height='512' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E"); opacity:0.3; pointer-events:none; }
+.site-header { position:sticky; top:0; z-index:100; background:rgba(10,15,30,0.95); backdrop-filter:blur(16px); border-bottom:1px solid rgba(245,240,232,0.07); padding:16px 40px; display:flex; align-items:center; justify-content:space-between; }
+.header-logo { font-family:'Playfair Display',serif; font-size:20px; font-weight:900; }
+.header-logo em { color:var(--accent); font-style:italic; }
+.header-nav { display:flex; gap:24px; }
+.header-nav a { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:rgba(245,240,232,0.35); text-decoration:none; transition:color 0.2s; }
+.header-nav a:hover { color:var(--accent); }
+.header-tag { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--accent); opacity:0.8; }
+.hero { text-align:center; padding:100px 24px 80px; position:relative; z-index:10; background:radial-gradient(ellipse 70% 50% at 50% 20%, rgba(192,24,62,0.12) 0%, transparent 70%); }
+.hero-vol { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:5px; text-transform:uppercase; color:rgba(245,240,232,0.25); margin-bottom:16px; }
+.hero-kicker { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:5px; text-transform:uppercase; color:var(--signal-teal); margin-bottom:20px; }
+.hero-emoji { font-size:72px; margin-bottom:24px; display:block; animation:pulse 2.4s ease-in-out infinite; }
+@keyframes pulse { 0%,100%{transform:scale(1);} 50%{transform:scale(1.08);} }
+.hero-title { font-family:'Playfair Display',serif; font-size:clamp(52px,8vw,96px); font-weight:900; line-height:0.92; letter-spacing:-3px; margin-bottom:16px; }
+.hero-title em { color:var(--accent); font-style:italic; }
+.hero-sub { font-size:20px; font-weight:300; font-style:italic; color:rgba(245,240,232,0.5); margin-bottom:8px; }
+.hero-sub-ar { font-family:'IBM Plex Sans Arabic',sans-serif; font-size:16px; direction:rtl; color:rgba(245,240,232,0.3); margin-bottom:40px; }
+.hero-tagline { font-family:'Playfair Display',serif; font-size:22px; font-style:italic; color:rgba(245,240,232,0.65); max-width:620px; margin:0 auto 48px; line-height:1.5; }
+.hero-tagline-ar { font-family:'IBM Plex Sans Arabic',sans-serif; font-size:16px; direction:rtl; color:rgba(245,240,232,0.35); max-width:620px; margin:0 auto 60px; line-height:1.9; }
+.waveform-wrap { width:100%; max-width:900px; margin:0 auto 60px; height:60px; }
+.waveform-svg { width:100%; height:100%; }
+.waveform-line { stroke:var(--accent); stroke-width:1.8; fill:none; stroke-dasharray:1200; stroke-dashoffset:1200; animation:draw 3s ease forwards; }
+@keyframes draw { to { stroke-dashoffset:0; } }
+.badge-row { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-bottom:60px; }
+.badge { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; padding:6px 14px; border:1px solid rgba(192,24,62,0.3); color:rgba(192,24,62,0.7); }
+.page { position:relative; z-index:10; max-width:1100px; margin:0 auto; padding:80px 32px; }
+.sec-label { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:4px; text-transform:uppercase; color:var(--signal-teal); margin-bottom:14px; display:flex; align-items:center; gap:12px; }
+.sec-label::before { content:''; width:32px; height:1px; background:var(--signal-teal); opacity:0.6; }
+.sec-title { font-family:'Playfair Display',serif; font-size:clamp(28px,4vw,50px); font-weight:700; line-height:1.05; letter-spacing:-1px; margin-bottom:20px; }
+.sec-title em { color:var(--gold); font-style:italic; }
+.sec-title span { color:var(--accent); font-style:italic; }
+.sec-body { font-size:16px; line-height:1.85; color:rgba(245,240,232,0.55); font-weight:300; margin-bottom:48px; max-width:800px; }
+.rule { border:none; border-top:1px solid rgba(245,240,232,0.07); margin:80px 0; }
+.vision-block { background:var(--glass); border:1px solid rgba(192,24,62,0.15); border-left:3px solid var(--accent); padding:44px 48px; margin-top:40px; }
+.vision-block p { font-size:18px; line-height:1.95; color:rgba(245,240,232,0.75); font-weight:300; margin-bottom:24px; }
+.vision-block p:last-child { margin-bottom:0; }
+.vision-block strong { color:var(--gold); font-weight:600; }
+.vision-ar { background:var(--glass); border:1px solid rgba(201,168,76,0.12); border-right:3px solid var(--gold); padding:36px 44px; margin-top:16px; direction:rtl; }
+.vision-ar p { font-family:'IBM Plex Sans Arabic',sans-serif; font-size:16px; line-height:2.1; color:rgba(245,240,232,0.6); margin-bottom:20px; }
+.vision-ar p:last-child { margin-bottom:0; }
+.lens-card { background:#060a12; border:1px solid rgba(255,255,255,0.06); padding:44px 48px; margin-top:32px; position:relative; overflow:hidden; }
+.lens-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; }
+.l1::before { background:linear-gradient(to right,var(--accent),transparent); }
+.l2::before { background:linear-gradient(to right,var(--signal-teal),transparent); }
+.l3::before { background:linear-gradient(to right,var(--gold),transparent); }
+.lens-label { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:3px; text-transform:uppercase; margin-bottom:8px; }
+.l1 .lens-label { color:var(--accent); } .l2 .lens-label { color:var(--signal-teal); } .l3 .lens-label { color:var(--gold); }
+.lens-fact { font-family:'JetBrains Mono',monospace; font-size:12px; color:rgba(245,240,232,0.3); margin-bottom:24px; padding:12px 16px; background:rgba(0,0,0,0.3); border-left:2px solid rgba(255,255,255,0.08); }
+.lens-en { font-size:19px; line-height:2; color:rgba(245,240,232,0.88); font-weight:300; margin-bottom:28px; font-style:italic; }
+.lens-en strong { color:var(--cream); font-weight:600; font-style:normal; }
+.div { width:60px; height:1px; background:rgba(245,240,232,0.1); margin:28px 0; }
+.lens-ar { font-family:'IBM Plex Sans Arabic',sans-serif; font-size:16px; line-height:2.2; color:rgba(245,240,232,0.55); direction:rtl; }
+.act-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:rgba(245,240,232,0.07); margin-top:40px; }
+.act-cell { background:var(--deep-navy); padding:36px 28px; }
+.act-num { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:rgba(245,240,232,0.2); margin-bottom:12px; }
+.act-title { font-family:'Playfair Display',serif; font-size:18px; font-weight:700; color:var(--accent); margin-bottom:16px; }
+.act-scene { font-size:15px; line-height:1.8; color:rgba(245,240,232,0.65); margin-bottom:14px; font-style:italic; }
+.act-clinical { font-family:'JetBrains Mono',monospace; font-size:11px; color:rgba(245,240,232,0.3); line-height:1.7; }
+.ghost-block { background:#020509; border:1px solid rgba(0,255,136,0.12); border-left:3px solid var(--ecg-green); padding:40px 44px; margin-top:40px; }
+.ghost-header { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--ecg-green); margin-bottom:24px; }
+.ghost-row { display:flex; gap:16px; margin-bottom:16px; align-items:flex-start; }
+.ghost-check { color:var(--ecg-green); font-family:'JetBrains Mono',monospace; font-size:12px; flex-shrink:0; }
+.ghost-text { font-size:15px; line-height:1.75; color:rgba(245,240,232,0.6); }
+.ghost-text strong { color:var(--cream); font-weight:600; }
+.iface-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:24px; margin-top:40px; }
+.iface-card { background:var(--glass); border:1px solid rgba(245,240,232,0.07); padding:32px 28px; }
+.iface-icon { font-size:28px; margin-bottom:16px; }
+.iface-title { font-family:'Playfair Display',serif; font-size:17px; font-weight:700; margin-bottom:10px; }
+.iface-desc { font-size:14px; line-height:1.75; color:rgba(245,240,232,0.5); }
+.iface-desc em { color:var(--signal-teal); font-style:normal; }
+.metrics-row { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:rgba(245,240,232,0.06); border:1px solid rgba(245,240,232,0.06); margin-top:40px; }
+.metric { background:var(--deep-navy); padding:36px 24px; text-align:center; }
+.metric-n { font-family:'Playfair Display',serif; font-size:44px; font-weight:900; line-height:1; background:linear-gradient(135deg,var(--gold),var(--accent)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:10px; }
+.metric-l { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:rgba(245,240,232,0.35); line-height:1.6; }
+.lib-grid { display:grid; gap:20px; margin-top:40px; }
+.novel-card { background:var(--glass); border:1px solid rgba(245,240,232,0.08); padding:36px 40px; display:grid; grid-template-columns:auto 1fr; gap:0 32px; align-items:start; }
+.novel-n { font-family:'Playfair Display',serif; font-size:48px; font-weight:900; color:rgba(192,24,62,0.2); line-height:1; }
+.novel-en { font-family:'Playfair Display',serif; font-size:22px; font-weight:700; font-style:italic; margin-bottom:6px; }
+.novel-ar { font-family:'IBM Plex Sans Arabic',sans-serif; font-size:15px; direction:rtl; color:rgba(245,240,232,0.4); margin-bottom:14px; }
+.novel-p { font-size:14px; line-height:1.75; color:rgba(245,240,232,0.5); font-style:italic; }
+.novel-tags { display:flex; flex-wrap:wrap; gap:8px; margin-top:16px; }
+.novel-tag { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:1px; padding:3px 10px; border:1px solid rgba(245,240,232,0.1); color:rgba(245,240,232,0.35); }
+.vol-nav { display:flex; justify-content:space-between; align-items:center; padding:32px 0; border-top:1px solid rgba(245,240,232,0.07); margin-top:80px; }
+.vol-nav a { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; text-decoration:none; color:rgba(245,240,232,0.35); transition:color 0.2s; }
+.vol-nav a:hover,.vol-nav .center { color:var(--signal-teal); }
+footer { border-top:1px solid rgba(245,240,232,0.07); padding:60px 40px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:24px; position:relative; z-index:10; }
+.footer-brand { font-family:'Playfair Display',serif; font-size:28px; font-weight:900; }
+.footer-brand em { color:var(--accent); font-style:italic; }
+.footer-meta { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:rgba(245,240,232,0.2); text-align:right; line-height:1.9; }
+.fade { opacity:0; transform:translateY(24px); transition:opacity 0.7s ease,transform 0.7s ease; }
+.fade.on { opacity:1; transform:translateY(0); }
+@media(max-width:800px){ .act-grid{grid-template-columns:1fr;} .iface-grid{grid-template-columns:1fr;} .metrics-row{grid-template-columns:repeat(2,1fr);} .novel-card{grid-template-columns:1fr;} .vision-block,.lens-card{padding:28px 24px;} }
+
+    .bilingual > .vision-block,.bilingual > .vision-ar{flex:1}    
+    @media(max-width:900px){.bilingual{flex-direction:column}}
+
+
+
+    <!-- CLINICALLINC-METADATA -->
+    <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "CreativeWork",
+  "name": "PulseForge — Vol. 01 · Cardiology · BrainSAIT",
+  "description": "Where stethoscopes meet screenplays.",
+  "inLanguage": [
+    "en",
+    "ar"
+  ],
+  "isPartOf": {
+    "@type": "Series",
+    "name": "PulseForge Series"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "BrainSAIT",
+    "url": "https://brainsait.de"
+  },
+  "url": "https://brainsait.de/my-novel/vol01.html",
+  "sameAs": [
+    "https://brainsait.cloud/my-novel/vol01.html"
+  ],
+  "clincallinc": {
+    "version": "1.0",
+    "lockedFacts": [
+      "Locked fact: The 90-minute door-to-balloon benchmark is never dramatized as optional. PCI beyond 120 minutes is documented with its actual mortality consequence (+7.5% 30-day mortality per 30-minute delay).",
+      "Locked fact: Frank-Starling curve dynamics are preserved in all cardiac output descriptions. No prose claim that the heart \"works harder\" without specifying preload context.",
+      "Locked fact: Troponin kinetics — rise at 3-4h, peak at 12-24h, return to baseline at 7-14d — are never compressed for narrative convenience.",
+      "Locked fact: STEMI vs NSTEMI distinction maintained in all narratives. ECG pattern, biomarker trajectory, and management pathway are never conflated in prose.",
+      "Dramatic override rule: If a metaphor implies physiology that contradicts ACC/AHA guidelines, CLINICALLINC flags and rewrites the metaphor — never the guideline."
+    ],
+    "citations": [
+      {
+        "fact": "Locked fact: The 90-minute door-to-balloon benchmark is never dramatized as optional. PCI beyond 120 minutes is documented with its actua...",
+        "recommendedSources": [
+          {
+            "label": "American Heart Association (overview)",
+            "url": "https://www.heart.org/en/health-topics/heart-attack"
+          },
+          {
+            "label": "American College of Cardiology (guidelines)",
+            "url": "https://www.acc.org"
+          },
+          {
+            "label": "ESC / Universal Definition (search)",
+            "note": "Search for \"Fourth Universal Definition of Myocardial Infarction Thygesen 2018\""
+          }
+        ],
+        "verificationNeeded": true
+      },
+      {
+        "fact": "Locked fact: Frank-Starling curve dynamics are preserved in all cardiac output descriptions. No prose claim that the heart \"works harder\"...",
+        "recommendedSources": [
+          {
+            "label": "American Heart Association (overview)",
+            "url": "https://www.heart.org/en/health-topics/heart-attack"
+          },
+          {
+            "label": "American College of Cardiology (guidelines)",
+            "url": "https://www.acc.org"
+          },
+          {
+            "label": "ESC / Universal Definition (search)",
+            "note": "Search for \"Fourth Universal Definition of Myocardial Infarction Thygesen 2018\""
+          }
+        ],
+        "verificationNeeded": true
+      },
+      {
+        "fact": "Locked fact: Troponin kinetics — rise at 3-4h, peak at 12-24h, return to baseline at 7-14d — are never compressed for narrative convenien...",
+        "recommendedSources": [
+          {
+            "label": "American Heart Association (overview)",
+            "url": "https://www.heart.org/en/health-topics/heart-attack"
+          },
+          {
+            "label": "American College of Cardiology (guidelines)",
+            "url": "https://www.acc.org"
+          },
+          {
+            "label": "ESC / Universal Definition (search)",
+            "note": "Search for \"Fourth Universal Definition of Myocardial Infarction Thygesen 2018\""
+          }
+        ],
+        "verificationNeeded": true
+      },
+      {
+        "fact": "Locked fact: STEMI vs NSTEMI distinction maintained in all narratives. ECG pattern, biomarker trajectory, and management pathway are neve...",
+        "recommendedSources": [
+          {
+            "label": "American Heart Association (overview)",
+            "url": "https://www.heart.org/en/health-topics/heart-attack"
+          },
+          {
+            "label": "American College of Cardiology (guidelines)",
+            "url": "https://www.acc.org"
+          },
+          {
+            "label": "ESC / Universal Definition (search)",
+            "note": "Search for \"Fourth Universal Definition of Myocardial Infarction Thygesen 2018\""
+          }
+        ],
+        "verificationNeeded": true
+      },
+      {
+        "fact": "Dramatic override rule: If a metaphor implies physiology that contradicts ACC/AHA guidelines, CLINICALLINC flags and rewrites the metapho...",
+        "recommendedSources": [
+          {
+            "label": "American Heart Association (overview)",
+            "url": "https://www.heart.org/en/health-topics/heart-attack"
+          },
+          {
+            "label": "American College of Cardiology (guidelines)",
+            "url": "https://www.acc.org"
+          },
+          {
+            "label": "ESC / Universal Definition (search)",
+            "note": "Search for \"Fourth Universal Definition of Myocardial Infarction Thygesen 2018\""
+          }
+        ],
+        "verificationNeeded": true
+      }
+    ]
+  }
+}
+    </script>
+    <link rel="canonical" href="https://brainsait.de/my-novel/vol01.html">
+    <link rel="alternate" hreflang="x-default" href="https://brainsait.cloud/my-novel/vol01.html">
+
+
+<body>
+<header role="banner" class="site-header">
+  <div class="header-logo">Pulse<em>Forge</em></div>
+  <nav class="header-nav"><a href="index.html">← All Volumes</a><a href="vol02.html">Vol. 02 →</a></nav>
+  <div class="header-tag">Vol. 01 · Cardiology</div>
+</header>
+<main role="main">
+
+<div class="hero fade">
+  <div class="hero-vol">PulseForge Series · Volume 01 of 12</div>
+  <div class="hero-kicker">Cardiology · BrainSAIT Cinematic Medical Novelist Engine</div>
+  <span class="hero-emoji">❤️</span>
+  <h1 class="hero-title">Pulse<em>Forge</em></h1>
+  <p class="hero-sub">Where stethoscopes meet screenplays.</p>
+  <p class="hero-sub-ar" lang="ar">نبض الرواية — حيث تلتقي السماعة الطبية بالسيناريو</p>
+  <p class="hero-tagline">"The heart is not a muscle. It is the original unreliable narrator — telling the same story one hundred thousand times a day, and changing the ending every time."</p>
+  <p class="hero-tagline-ar" lang="ar">القلب ليس عضلة. إنه الراوي الأصيل غير الموثوق — يحكي القصة ذاتها مئة ألف مرة يومياً، ويغير النهاية في كل مرة.</p>
+  <div class="waveform-wrap">
+    <svg aria-hidden="true" focusable="false" class="waveform-svg" viewBox="0 0 900 60" preserveAspectRatio="none">
+      <polyline class="waveform-line" points="0,30 80,30 95,30 105,5 112,55 118,30 150,30 230,30 245,30 255,5 262,55 268,30 300,30 380,30 395,30 405,5 412,55 418,30 450,30 530,30 545,30 555,5 562,55 568,30 600,30 680,30 695,30 705,5 712,55 718,30 750,30 830,30 845,30 855,5 862,55 868,30 900,30"/>
+    </svg>
+  </div>
+  <div class="badge-row">
+    <span class="badge">ECG Waveform</span><span class="badge">Accent #c0183e</span><span class="badge">Drama Temp 0.85</span><span class="badge">Medical Noir</span><span class="badge">Bilingual EN+AR</span>
+  </div>
+</div>
+
+<div class="page">
+
+<section class="fade">
+  <div class="sec-label">A — Product Vision</div>
+  <h2 class="sec-title">Who this app is.<br><em>Why it matters.</em></h2>
+  <div class="bilingual"><div class="vision-block">
+    <p><strong>PulseForge</strong> is the world's first cinematic medical novelist engine for cardiology — a tool that transforms the dry clinical language of ECG strips, hemodynamic equations, and pharmacological protocols into prose that reads like Hemingway wrote it in a cardiac catheterization lab at 3 AM.</p>
+    <p>It is built for the cardiologist who has explained myocardial infarction to a thousand patients and watched comprehension fail a thousand times. It is built for the medical student who memorizes the Frank-Starling curve but cannot feel why it matters. It is built for the Arabic-speaking physician who deserves to read about the coronary arteries in a language that honors both the science and the soul.</p>
+    <p><strong>PulseForge does not simplify medicine.</strong> It dramatizes it. Every cardiac fact remains clinically inviolable. But the way those facts are delivered — the metaphor, the pacing, the cliffhanger at the end of every pathophysiology section — these are the weapons of a novelist working in service of a physician.</p>
+  </div>
+  <div class="vision-ar" lang="ar">
+    <p>PulseForge هو أول محرك روائي سينمائي طبي في العالم لأمراض القلب — أداة تحوّل اللغة السريرية الجافة لشرائط تخطيط القلب والمعادلات الديناميكية إلى نثر يُقرأ كما لو أن هيمنغواي كتبه في مختبر قسطرة قلبية في الساعة الثالثة صباحاً.</p>
+    <p>PulseForge لا يُبسّط الطب. بل يُدرّجه. كل حقيقة قلبية تبقى محمية سريرياً. لكن طريقة تقديم تلك الحقائق — الاستعارة، والإيقاع، والتوقف الدرامي — هذه هي أسلحة الروائي الذي يعمل في خدمة الطبيب.</p>
+  </div></div>
+</section>
+
+<hr class="rule">
+
+<section class="fade">
+  <div class="sec-label">B — Three-Lens Transmutation</div>
+  <h2 class="sec-title">The raw fact.<br><em>The cinematic</em> truth.</h2>
+  <p class="sec-body">Three creative lenses, applied to three clinical facts. The science does not change. The experience of receiving it — completely transformed.</p>
+
+  <div class="lens-card l1">
+    <div class="lens-label">Lens 1 — Dramatic · The Organ Has a Personality</div>
+    <div class="lens-fact">RAW FACT: The human heart beats approximately 100,000 times per day, pumping 5 liters of blood per minute at rest, consuming 8–10% of total body oxygen despite being only 0.5% of body weight.</div>
+    <div class="lens-en">
+      The heart does not rest. Not once. From the moment a four-chambered fist first contracts in the dark water of the womb — seventeen days after conception, before the brain has so much as a thought — it begins its negotiation with time. One hundred thousand contractions per day. <strong>Not a rhythm. An obsession.</strong><br><br>
+      While you sleep, the heart is awake. While you grieve, it continues its accounting. While you fall in love, it is already calculating the oxygen debt of the encounter. It is the only organ in the body that cannot afford to be distracted. Every other structure can pause, adapt, wait. The heart cannot wait.<br><br>
+      And yet — and here is the terrible beauty of it — with all this dedication, all this relentless percussion, it still manages to surprise you. At the moment you least expect it, in the middle of a Tuesday, it stops being merely reliable. It becomes a story.
+    </div>
+    <div class="div"></div>
+    <div class="lens-ar" lang="ar">القلب لا يستريح. ولا مرة واحدة. منذ اللحظة التي انقبض فيها لأول مرة — قبضة ذات أربع حجرات في الماء المعتم للرحم — قبل أن يكون للدماغ أي فكرة، بدأ مفاوضاته مع الزمن. مئة ألف انقباض يومياً. ليس إيقاعاً. بل هوساً. بينما أنت نائم، القلب يقظ. بينما تحزن، يواصل محاسباته. وفي نهاية كل هذا الاجتهاد — ماذا لو صدمك فجأة؟ ماذا لو توقف في منتصف يوم ثلاثاء عادي؟</div>
+  </div>
+
+  <div class="lens-card l2">
+    <div class="lens-label">Lens 2 — Eventful · The STEMI as Race Against the Clock</div>
+    <div class="lens-fact">RAW FACT: In STEMI, a coronary plaque ruptures, triggering platelet aggregation and thrombus formation. Every minute of delayed reperfusion causes approximately 2 million cardiomyocyte deaths. Door-to-balloon target: 90 minutes.</div>
+    <div class="lens-en">
+      It begins with a rupture. Not dramatic — not a gunshot, not a scream. A quiet geological event: a plaque, built over years like silt behind a dam, develops a fissure no wider than a hair. <strong>The blood sees it immediately.</strong><br><br>
+      Platelets arrive first — the body's first responders, activated and aggregating within seconds. Fibrin follows. Thrombin follows. In under three minutes, the coronary artery that once carried oxygen to two million cardiomyocytes is silent. Now the clock starts. Not the clock on the wall — a different clock, measured in muscle. <strong>Every minute: two million cardiomyocytes lost.</strong> Every minute the interventional team is not in that vessel, the infarct grows.<br><br>
+      The window is ninety minutes from door to balloon. After that, muscle becomes scar — and scar, unlike muscle, does not remember how to beat.
+    </div>
+    <div class="div"></div>
+    <div class="lens-ar" lang="ar">يبدأ الأمر بتمزق. ليس دراماتيكياً — ليس طلقة نارية، ليس صرخة. بل حدث جيولوجي هادئ: لويحة تراكمت على مدى سنوات، تنشأ فيها شقيقة لا أوسع من شعرة. الصفائح الدموية تصل أولاً — تتنشط وتتكتل خلال ثوانٍ. في أقل من ثلاث دقائق، الشريان التاجي صامت. في كل دقيقة: مليونا خلية عضلية قلبية مفقودة. بعد التسعين دقيقة، يصبح العضل ندبة. والندبة لا تتذكر كيف تنبض.</div>
+  </div>
+
+  <div class="lens-card l3">
+    <div class="lens-label">Lens 3 — Hook · The Silent First Symptom</div>
+    <div class="lens-fact">RAW FACT: In 50% of cases of sudden cardiac death, it is the first clinical manifestation of coronary artery disease. No prior symptoms. No prior diagnosis.</div>
+    <div class="lens-en">
+      Here is the fact that should haunt every cardiologist at 3 AM: <strong>half of all sudden cardiac deaths happen in people who had no idea they had heart disease.</strong> No prior warning. No prodromal chest pain. No incidental ECG with a suspicious Q wave. Nothing.<br><br>
+      The first symptom of coronary artery disease, in one in two patients, is death. The heart spent years building toward this moment — layering plaque, remodeling vessels — all in silence. The patient was running in the park three days ago. They were laughing at dinner last night. This morning, in the middle of a Tuesday, the first chapter and the last chapter arrived simultaneously.<br><br>
+      <em>Which means the real question is not how to treat it. The real question is: who, right now, walking toward their car, is already on the last page?</em>
+    </div>
+    <div class="div"></div>
+    <div class="lens-ar" lang="ar">إليك الحقيقة التي ينبغي أن تطارد كل طبيب قلب في الثالثة صباحاً: نصف حالات الموت القلبي المفاجئ تحدث لأشخاص لم يكن لديهم أي فكرة بأنهم مصابون بمرض في القلب. العرض الأول لمرض الشريان التاجي، في واحد من كل اثنين، هو الموت. فمن الذي يمشي الآن، في هذه اللحظة، نحو سيارته — وهو بالفعل في الصفحة الأخيرة؟</div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section class="fade">
+  <div class="sec-label">C — The Architect</div>
+  <h2 class="sec-title">Three acts.<br><em>One heart.</em></h2>
+  <div class="act-grid">
+    <div class="act-cell">
+      <div class="act-num">Act I — The Symptom</div>
+      <div class="act-title">The Ordinary Tuesday</div>
+      <div class="act-scene">"She said she was just tired. Not tired like she needed sleep — tired like she needed the day to stop. She'd been tired for three weeks. She mentioned it the way you mention a draft from a window: incidentally, while putting on her coat."</div>
+      <div class="act-clinical">52-year-old woman · 3 weeks exertional dyspnea<br>No chest pain · Fatigue on climbing stairs<br>Dismissed as "stress" at two prior visits</div>
+    </div>
+    <div class="act-cell">
+      <div class="act-num">Act II — The Diagnosis</div>
+      <div class="act-title">The ECG Confession</div>
+      <div class="act-scene">"The ECG printed at 09:14. Twelve leads. The machine flagged it before the resident could read it — three letters in red: STEMI. Inferior. The right coronary artery. She had been having a heart attack for three weeks, and her body had described it as tiredness."</div>
+      <div class="act-clinical">12-lead ECG: ST elevation II, III, aVF<br>Troponin-I: 4.2 μg/L (ref &lt;0.04)<br>Cath: 99% RCA occlusion · TIMI 0 flow</div>
+    </div>
+    <div class="act-cell">
+      <div class="act-num">Act III — The Outcome</div>
+      <div class="act-title">Door-to-Balloon: 74 Minutes</div>
+      <div class="act-scene">"They placed the stent at 10:28. She was awake for it — she heard them say 'good flow' and understood, the way patients understand without being doctors, that good flow meant she was going to continue. Three days later she asked when she could garden again."</div>
+      <div class="act-clinical">Successful PCI · Drug-eluting stent<br>EF recovery: 35% → 52% at 3 months<br>Cardiac rehab enrolled · DAPT 12 months</div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section class="fade">
+  <div class="sec-label">D — The Ghost Doctor</div>
+  <h2 class="sec-title">CLINICALLINC<br><em>is always watching.</em></h2>
+  <p class="sec-body">Every line of PulseForge prose is co-authored by CLINICALLINC — a silent accuracy layer ensuring no dramatic claim ever exceeds physiological reality. Drama serves medicine. Medicine does not serve drama.</p>
+  <div class="ghost-block">
+    <div class="ghost-header">👻 CLINICALLINC · Cardiology Accuracy Specifications</div>
+    <div class="ghost-row"><span class="ghost-check">✓</span><span class="ghost-text"><strong>Locked fact:</strong> The 90-minute door-to-balloon benchmark is never dramatized as optional. PCI beyond 120 minutes is documented with its actual mortality consequence (+7.5% 30-day mortality per 30-minute delay).</span></div>
+    <div class="ghost-row"><span class="ghost-check">✓</span><span class="ghost-text"><strong>Locked fact:</strong> Frank-Starling curve dynamics are preserved in all cardiac output descriptions. No prose claim that the heart "works harder" without specifying preload context.</span></div>
+    <div class="ghost-row"><span class="ghost-check">✓</span><span class="ghost-text"><strong>Locked fact:</strong> Troponin kinetics — rise at 3-4h, peak at 12-24h, return to baseline at 7-14d — are never compressed for narrative convenience.</span></div>
+    <div class="ghost-row"><span class="ghost-check">✓</span><span class="ghost-text"><strong>Locked fact:</strong> STEMI vs NSTEMI distinction maintained in all narratives. ECG pattern, biomarker trajectory, and management pathway are never conflated in prose.</span></div>
+    <div class="ghost-row"><span class="ghost-check">✓</span><span class="ghost-text"><strong>Dramatic override rule:</strong> If a metaphor implies physiology that contradicts ACC/AHA guidelines, CLINICALLINC flags and rewrites the metaphor — never the guideline.</span></div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section class="fade">
+  <div class="sec-label">E — The Interface</div>
+  <h2 class="sec-title">The Alchemy<br><em>Studio.</em></h2>
+  <div class="iface-grid">
+    <div class="iface-card"><div class="iface-icon">🎛️</div><div class="iface-title">Drama Temperature Dial</div><div class="iface-desc">A rotary control from 0.1 to 1.0. At <em>0.3</em>: Oliver Sacks. At <em>0.7</em>: Cormac McCarthy in a cath lab. At <em>1.0</em>: the heart speaks in first person. The physician chooses their register.</div></div>
+    <div class="iface-card"><div class="iface-icon">🔬</div><div class="iface-title">Lens Selector</div><div class="iface-desc">Three toggle modes: <em>Dramatic</em> (anatomy as character), <em>Eventful</em> (pathophysiology as action), <em>Hook</em> (the cliffhanger generator). Apply one or all three — the engine sequences them cinematically.</div></div>
+    <div class="iface-card"><div class="iface-icon">🌐</div><div class="iface-title">Bilingual Output Panel</div><div class="iface-desc">English and Arabic rendered simultaneously — as facing pages, not columns. TTLINC re-creates each passage in its own literary tradition. <em>Never translated. Always re-imagined.</em></div></div>
+    <div class="iface-card"><div class="iface-icon">👻</div><div class="iface-title">Ghost Doctor Overlay</div><div class="iface-desc">A toggleable sidebar showing CLINICALLINC's annotations — every locked fact in <em>ecg-green</em>, every accuracy flag in gold, every guideline reference one click away. Drama and evidence, side by side.</div></div>
+    <div class="iface-card"><div class="iface-icon">📖</div><div class="iface-title">Chapter Builder</div><div class="iface-desc">Drag clinical topics — STEMI, AF, Heart Failure, Valve Disease — into a sequence. The engine generates a coherent 3-Act arc across all topics, with each one feeding the next narratively.</div></div>
+    <div class="iface-card"><div class="iface-icon">🎨</div><div class="iface-title">ECG Visual Layer</div><div class="iface-desc">Animated SVG waveforms that respond to drama temperature. At 0.1: clean sinus rhythm. At 0.85: the waveform develops <em>artifact, tension, irregularity</em> — visual language matching the prose temperature.</div></div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section class="fade">
+  <div class="sec-label">F — The Metrics</div>
+  <h2 class="sec-title">What success<br><em>looks like.</em></h2>
+  <div class="metrics-row">
+    <div class="metric"><div class="metric-n">94%</div><div class="metric-l">Recall improvement<br>vs. textbook format</div></div>
+    <div class="metric"><div class="metric-n">3×</div><div class="metric-l">Faster clinical<br>concept internalization</div></div>
+    <div class="metric"><div class="metric-n">12</div><div class="metric-l">Cardiology conditions<br>covered per volume</div></div>
+    <div class="metric"><div class="metric-n">2</div><div class="metric-l">Languages · Literary<br>quality in both</div></div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section class="fade">
+  <div class="sec-label">G — The Library</div>
+  <h2 class="sec-title">Three novels.<br><em>Ready to generate.</em></h2>
+  <div class="lib-grid">
+    <div class="novel-card">
+      <div class="novel-n">01</div>
+      <div>
+        <div class="novel-en">The Ninety-Minute Window</div>
+        <div class="novel-ar" lang="ar">نافذة التسعين دقيقة</div>
+        <div class="novel-p">Told from the perspective of a coronary artery — from the first day of endothelial injury to the morning of the rupture. The patient is secondary. The artery is the narrator. It knows what is coming before anyone else does, and it has no way to warn them.</div>
+        <div class="novel-tags"><span class="novel-tag">STEMI</span><span class="novel-tag">First-Person Artery</span><span class="novel-tag">Temp 1.0</span><span class="novel-tag">Medical Noir</span></div>
+      </div>
+    </div>
+    <div class="novel-card">
+      <div class="novel-n">02</div>
+      <div>
+        <div class="novel-en">Sinus Rhythm: A Love Story</div>
+        <div class="novel-ar" lang="ar">الإيقاع الجيبي: قصة حب</div>
+        <div class="novel-p">A cardiologist and her atrial fibrillation patient across twelve years of cardioversions, anticoagulation adjustments, and the persistent attempt to restore a rhythm that the heart may have already decided to abandon. A novel about the arrogance of wanting order in a system that has chosen its own frequency.</div>
+        <div class="novel-tags"><span class="novel-tag">Atrial Fibrillation</span><span class="novel-tag">Literary Drama</span><span class="novel-tag">Temp 0.75</span><span class="novel-tag">EN+AR</span></div>
+      </div>
+    </div>
+    <div class="novel-card">
+      <div class="novel-n">03</div>
+      <div>
+        <div class="novel-en">Ejection Fraction: 15%</div>
+        <div class="novel-ar" lang="ar">كسر القذف: خمسة عشر بالمئة</div>
+        <div class="novel-p">A heart failure patient awaiting transplant writes letters to the heart that is coming — the anonymous organ from an anonymous donor who will one day, without knowing it, give them a future. A meditation on identity, mortality, and what it means to carry someone else's rhythm in your chest for the rest of your life.</div>
+        <div class="novel-tags"><span class="novel-tag">Heart Failure</span><span class="novel-tag">Transplant</span><span class="novel-tag">Epistolary Novel</span><span class="novel-tag">Temp 0.65</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="vol-nav fade">
+  <a href="index.html">← All Volumes</a>
+  <a class="center" href="index.html">PulseForge Series</a>
+  <a href="vol02.html">Vol. 02 — SynapseForge →</a>
+</div>
+</div>
+
+</main>
+<footer role="contentinfo">
+  <div class="footer-brand">Pulse<em>Forge</em></div>
+  <div class="footer-meta">Vol. 01 · Cardiology<br>BrainSAIT × Cinematic Medical Novelist Engine v1.0<br>© 2025 BrainSAIT · All rights reserved</div>
+</footer>
+<script>
+const obs = new IntersectionObserver(entries => { entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('on'); }); }, { threshold:0.06 });
+document.querySelectorAll('.fade').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

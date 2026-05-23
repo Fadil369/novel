@@ -1,0 +1,73 @@
+=== index.html ===
+
+Welcome to Pa11y
+
+ > Running Pa11y on URL file:///home/fadil369/my-novel/index.html
+
+Error: Failed to launch the browser process! spawn /home/fadil369/.nvm/versions/node/v24.16.0/lib/node_modules/pa11y/node_modules/puppeteer/.local-chromium/linux-869685/chrome-linux/chrome ENOENT
+
+
+TROUBLESHOOTING: https://github.com/puppeteer/puppeteer/blob/main/docs/troubleshooting.md
+
+    at onClose (/home/fadil369/.nvm/versions/node/v24.16.0/lib/node_modules/pa11y/node_modules/puppeteer/lib/cjs/puppeteer/node/BrowserRunner.js:194:20)
+    at ChildProcess.<anonymous> (/home/fadil369/.nvm/versions/node/v24.16.0/lib/node_modules/pa11y/node_modules/puppeteer/lib/cjs/puppeteer/node/BrowserRunner.js:186:85)
+    at ChildProcess.emit (node:events:509:28)
+    at ChildProcess._handle.onexit (node:internal/child_process:293:12)
+    at onErrorNT (node:internal/child_process:508:16)
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+
+=== vol*.html ===
+
+Welcome to Pa11y
+
+ > Running Pa11y on URL file:///home/fadil369/my-novel/vol*.html
+
+Error: Failed to launch the browser process! spawn /home/fadil369/.nvm/versions/node/v24.16.0/lib/node_modules/pa11y/node_modules/puppeteer/.local-chromium/linux-869685/chrome-linux/chrome ENOENT
+
+
+TROUBLESHOOTING: https://github.com/puppeteer/puppeteer/blob/main/docs/troubleshooting.md
+
+    at onClose (/home/fadil369/.nvm/versions/node/v24.16.0/lib/node_modules/pa11y/node_modules/puppeteer/lib/cjs/puppeteer/node/BrowserRunner.js:194:20)
+    at ChildProcess.<anonymous> (/home/fadil369/.nvm/versions/node/v24.16.0/lib/node_modules/pa11y/node_modules/puppeteer/lib/cjs/puppeteer/node/BrowserRunner.js:186:85)
+    at ChildProcess.emit (node:events:509:28)
+    at ChildProcess._handle.onexit (node:internal/child_process:293:12)
+    at onErrorNT (node:internal/child_process:508:16)
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+
+--- tail of report ---
+=== index.html ===
+
+Welcome to Pa11y
+
+ > Running Pa11y on URL file:///home/fadil369/my-novel/index.html
+
+Error: Failed to launch the browser process! spawn /home/fadil369/.nvm/versions/node/v24.16.0/lib/node_modules/pa11y/node_modules/puppeteer/.local-chromium/linux-869685/chrome-linux/chrome ENOENT
+
+
+TROUBLESHOOTING: https://github.com/puppeteer/puppeteer/blob/main/docs/troubleshooting.md
+
+    at onClose (/home/fadil369/.nvm/versions/node/v24.16.0/lib/node_modules/pa11y/node_modules/puppeteer/lib/cjs/puppeteer/node/BrowserRunner.js:194:20)
+    at ChildProcess.<anonymous> (/home/fadil369/.nvm/versions/node/v24.16.0/lib/node_modules/pa11y/node_modules/puppeteer/lib/cjs/puppeteer/node/BrowserRunner.js:186:85)
+    at ChildProcess.emit (node:events:509:28)
+    at ChildProcess._handle.onexit (node:internal/child_process:293:12)
+    at onErrorNT (node:internal/child_process:508:16)
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+
+=== vol*.html ===
+
+Welcome to Pa11y
+
+ > Running Pa11y on URL file:///home/fadil369/my-novel/vol*.html
+
+Error: Failed to launch the browser process! spawn /home/fadil369/.nvm/versions/node/v24.16.0/lib/node_modules/pa11y/node_modules/puppeteer/.local-chromium/linux-869685/chrome-linux/chrome ENOENT
+
+
+TROUBLESHOOTING: https://github.com/puppeteer/puppeteer/blob/main/docs/troubleshooting.md
+
+    at onClose (/home/fadil369/.nvm/versions/node/v24.16.0/lib/node_modules/pa11y/node_modules/puppeteer/lib/cjs/puppeteer/node/BrowserRunner.js:194:20)
+    at ChildProcess.<anonymous> (/home/fadil369/.nvm/versions/node/v24.16.0/lib/node_modules/pa11y/node_modules/puppeteer/lib/cjs/puppeteer/node/BrowserRunner.js:186:85)
+    at ChildProcess.emit (node:events:509:28)
+    at ChildProcess._handle.onexit (node:internal/child_process:293:12)
+    at onErrorNT (node:internal/child_process:508:16)
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+

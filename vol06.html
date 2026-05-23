@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TraumaForge — Vol. 06 · Emergency Medicine · BrainSAIT</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel=\"stylesheet\" href=\"assets/styles.min.css\">
+    <link rel="stylesheet" href="assets/styles.css">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;700&family=JetBrains+Mono:wght@300;400;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root { --midnight:#0a0f1e; --deep-navy:#0d1529; --signal-teal:#00c9b8; --ecg-green:#00ff88; --cream:#f5f0e8; --gold:#c9a84c; --accent:#dc2626; --glass:rgba(255,255,255,0.03); }
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { background:var(--midnight); color:var(--cream); font-family:'Cormorant Garamond',serif; overflow-x:hidden; }
+body::before { content:''; position:fixed; inset:0; z-index:0; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='512' height='512' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E"); opacity:0.3; pointer-events:none; }
+.site-header { position:sticky; top:0; z-index:100; background:rgba(10,15,30,0.95); backdrop-filter:blur(16px); border-bottom:1px solid rgba(245,240,232,0.07); padding:16px 40px; display:flex; align-items:center; justify-content:space-between; }
+.header-logo { font-family:'Playfair Display',serif; font-size:20px; font-weight:900; }
+.header-logo em { color:var(--accent); font-style:italic; }
+.header-nav { display:flex; gap:24px; }
+.header-nav a { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:rgba(245,240,232,0.35); text-decoration:none; transition:color 0.2s; }
+.header-nav a:hover { color:var(--accent); }
+.header-tag { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--accent); opacity:0.8; }
+.hero { text-align:center; padding:100px 24px 80px; position:relative; z-index:10; background:radial-gradient(ellipse 70% 50% at 50% 20%, rgba(220,38,38,0.12) 0%, transparent 70%); }
+.hero-vol { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:5px; text-transform:uppercase; color:rgba(245,240,232,0.25); margin-bottom:16px; }
+.hero-kicker { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:5px; text-transform:uppercase; color:var(--signal-teal); margin-bottom:20px; }
+.hero-emoji { font-size:72px; margin-bottom:24px; display:block; animation:shock 2s ease-in-out infinite; }
+@keyframes shock { 0%,90%,100%{transform:scale(1)} 92%{transform:scale(1.15)} 96%{transform:scale(0.95)} }
+.hero-title { font-family:'Playfair Display',serif; font-size:clamp(52px,8vw,96px); font-weight:900; line-height:0.92; letter-spacing:-3px; margin-bottom:16px; }
+.hero-title em { color:var(--accent); font-style:italic; }
+.hero-sub { font-size:20px; font-weight:300; font-style:italic; color:rgba(245,240,232,0.5); margin-bottom:8px; }
+.hero-sub-ar { font-family:'IBM Plex Sans Arabic',sans-serif; font-size:16px; direction:rtl; color:rgba(245,240,232,0.3); margin-bottom:40px; }
+.hero-tagline { font-family:'Playfair Display',serif; font-size:22px; font-style:italic; color:rgba(245,240,232,0.65); max-width:640px; margin:0 auto 48px; line-height:1.5; }
+.hero-tagline-ar { font-family:'IBM Plex Sans Arabic',sans-serif; font-size:16px; direction:rtl; color:rgba(245,240,232,0.35); max-width:640px; margin:0 auto 60px; line-height:1.9; }
+.waveform-wrap { width:100%; max-width:900px; margin:0 auto 60px; height:60px; }
+.waveform-svg { width:100%; height:100%; }
+.waveform-line { stroke:var(--accent); stroke-width:1.8; fill:none; stroke-dasharray:1400; stroke-dashoffset:1400; animation:draw 2.5s ease forwards; }
+@keyframes draw { to { stroke-dashoffset:0; } }
+.badge-row { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-bottom:60px; }
+.badge { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; padding:6px 14px; border:1px solid rgba(220,38,38,0.3); color:rgba(220,38,38,0.7); }
+.page { position:relative; z-index:10; max-width:1100px; margin:0 auto; padding:80px 32px; }
+.sec-label { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:4px; text-transform:uppercase; color:var(--signal-teal); margin-bottom:14px; display:flex; align-items:center; gap:12px; }
+.sec-label::before { content:''; width:32px; height:1px; background:var(--signal-teal); opacity:0.6; }
+.sec-title { font-family:'Playfair Display',serif; font-size:clamp(28px,4vw,50px); font-weight:700; line-height:1.05; letter-spacing:-1px; margin-bottom:20px; }
+.sec-title em { color:var(--gold); font-style:italic; }
+.sec-body { font-size:16px; line-height:1.85; color:rgba(245,240,232,0.55); font-weight:300; margin-bottom:48px; max-width:800px; }
+.rule { border:none; border-top:1px solid rgba(245,240,232,0.07); margin:80px 0; }
+.vision-block { background:var(--glass); border:1px solid rgba(220,38,38,0.15); border-left:3px solid var(--accent); padding:44px 48px; margin-top:40px; }
+.vision-block p { font-size:18px; line-height:1.95; color:rgba(245,240,232,0.75); font-weight:300; margin-bottom:24px; }
+.vision-block p:last-child { margin-bottom:0; }
+.vision-block strong { color:var(--gold); font-weight:600; }
+.vision-ar { background:var(--glass); border:1px solid rgba(201,168,76,0.12); border-right:3px solid var(--gold); padding:36px 44px; margin-top:16px; direction:rtl; }
+.vision-ar p { font-family:'IBM Plex Sans Arabic',sans-serif; font-size:16px; line-height:2.1; color:rgba(245,240,232,0.6); margin-bottom:20px; }
+.vision-ar p:last-child { margin-bottom:0; }
+.lens-card { background:#060a12; border:1px solid rgba(255,255,255,0.06); padding:44px 48px; margin-top:32px; position:relative; overflow:hidden; }
+.lens-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; }
+.l1::before { background:linear-gradient(to right,var(--accent),transparent); }
+.l2::before { background:linear-gradient(to right,var(--signal-teal),transparent); }
+.l3::before { background:linear-gradient(to right,var(--gold),transparent); }
+.lens-label { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:3px; text-transform:uppercase; margin-bottom:8px; }
+.l1 .lens-label { color:var(--accent); } .l2 .lens-label { color:var(--signal-teal); } .l3 .lens-label { color:var(--gold); }
+.lens-fact { font-family:'JetBrains Mono',monospace; font-size:12px; color:rgba(245,240,232,0.3); margin-bottom:24px; padding:12px 16px; background:rgba(0,0,0,0.3); border-left:2px solid rgba(255,255,255,0.08); }
+.lens-en { font-size:19px; line-height:2; color:rgba(245,240,232,0.88); font-weight:300; margin-bottom:28px; font-style:italic; }
+.lens-en strong { color:var(--cream); font-weight:600; font-style:normal; }
+.div { width:60px; height:1px; background:rgba(245,240,232,0.1); margin:28px 0; }
+.lens-ar { font-family:'IBM Plex Sans Arabic',sans-serif; font-size:16px; line-height:2.2; color:rgba(245,240,232,0.55); direction:rtl; }
+.act-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:rgba(245,240,232,0.07); margin-top:40px; }
+.act-cell { background:var(--deep-navy); padding:36px 28px; }
+.act-num { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:rgba(245,240,232,0.2); margin-bottom:12px; }
+.act-title { font-family:'Playfair Display',serif; font-size:18px; font-weight:700; color:var(--accent); margin-bottom:16px; }
+.act-scene { font-size:15px; line-height:1.8; color:rgba(245,240,232,0.65); margin-bottom:14px; font-style:italic; }
+.act-clinical { font-family:'JetBrains Mono',monospace; font-size:11px; color:rgba(245,240,232,0.3); line-height:1.7; }
+.ghost-block { background:#020509; border:1px solid rgba(0,255,136,0.12); border-left:3px solid var(--ecg-green); padding:40px 44px; margin-top:40px; }
+.ghost-header { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--ecg-green); margin-bottom:24px; }
+.ghost-row { display:flex; gap:16px; margin-bottom:16px; align-items:flex-start; }
+.ghost-check { color:var(--ecg-green); font-family:'JetBrains Mono',monospace; font-size:12px; flex-shrink:0; }
+.ghost-text { font-size:15px; line-height:1.75; color:rgba(245,240,232,0.6); }
+.ghost-text strong { color:var(--cream); font-weight:600; }
+.iface-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:24px; margin-top:40px; }
+.iface-card { background:var(--glass); border:1px solid rgba(245,240,232,0.07); padding:32px 28px; }
+.iface-icon { font-size:28px; margin-bottom:16px; }
+.iface-title { font-family:'Playfair Display',serif; font-size:17px; font-weight:700; margin-bottom:10px; }
+.iface-desc { font-size:14px; line-height:1.75; color:rgba(245,240,232,0.5); }
+.iface-desc em { color:var(--signal-teal); font-style:normal; }
+.metrics-row { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:rgba(245,240,232,0.06); border:1px solid rgba(245,240,232,0.06); margin-top:40px; }
+.metric { background:var(--deep-navy); padding:36px 24px; text-align:center; }
+.metric-n { font-family:'Playfair Display',serif; font-size:44px; font-weight:900; line-height:1; background:linear-gradient(135deg,var(--gold),var(--accent)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:10px; }
+.metric-l { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:rgba(245,240,232,0.35); line-height:1.6; }
+.lib-grid { display:grid; gap:20px; margin-top:40px; }
+.novel-card { background:var(--glass); border:1px solid rgba(245,240,232,0.08); padding:36px 40px; display:grid; grid-template-columns:auto 1fr; gap:0 32px; align-items:start; }
+.novel-n { font-family:'Playfair Display',serif; font-size:48px; font-weight:900; color:rgba(220,38,38,0.2); line-height:1; }
+.novel-en { font-family:'Playfair Display',serif; font-size:22px; font-weight:700; font-style:italic; margin-bottom:6px; }
+.novel-ar { font-family:'IBM Plex Sans Arabic',sans-serif; font-size:15px; direction:rtl; color:rgba(245,240,232,0.4); margin-bottom:14px; }
+.novel-p { font-size:14px; line-height:1.75; color:rgba(245,240,232,0.5); font-style:italic; }
+.novel-tags { display:flex; flex-wrap:wrap; gap:8px; margin-top:16px; }
+.novel-tag { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:1px; padding:3px 10px; border:1px solid rgba(245,240,232,0.1); color:rgba(245,240,232,0.35); }
+.vol-nav { display:flex; justify-content:space-between; align-items:center; padding:32px 0; border-top:1px solid rgba(245,240,232,0.07); margin-top:80px; }
+.vol-nav a { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; text-decoration:none; color:rgba(245,240,232,0.35); transition:color 0.2s; }
+.vol-nav a:hover,.vol-nav .center { color:var(--signal-teal); }
+footer { border-top:1px solid rgba(245,240,232,0.07); padding:60px 40px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:24px; position:relative; z-index:10; }
+.footer-brand { font-family:'Playfair Display',serif; font-size:28px; font-weight:900; }
+.footer-brand em { color:var(--accent); font-style:italic; }
+.footer-meta { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:rgba(245,240,232,0.2); text-align:right; line-height:1.9; }
+.fade { opacity:0; transform:translateY(24px); transition:opacity 0.7s ease,transform 0.7s ease; }
+.fade.on { opacity:1; transform:translateY(0); }
+@media(max-width:800px){ .act-grid{grid-template-columns:1fr;} .iface-grid{grid-template-columns:1fr;} .metrics-row{grid-template-columns:repeat(2,1fr);} .novel-card{grid-template-columns:1fr;} }
+
+    .bilingual > .vision-block,.bilingual > .vision-ar{flex:1}    
+    @media(max-width:900px){.bilingual{flex-direction:column}}
+
+
+
+    <!-- CLINICALLINC-METADATA -->
+    <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "CreativeWork",
+  "name": "TraumaForge — Vol. 06 · Emergency Medicine · BrainSAIT",
+  "description": "Where triage meets war literature.",
+  "inLanguage": [
+    "en",
+    "ar"
+  ],
+  "isPartOf": {
+    "@type": "Series",
+    "name": "PulseForge Series"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "BrainSAIT",
+    "url": "https://brainsait.de"
+  },
+  "url": "https://brainsait.de/my-novel/vol06.html",
+  "sameAs": [
+    "https://brainsait.cloud/my-novel/vol06.html"
+  ],
+  "clincallinc": {
+    "version": "1.0",
+    "lockedFacts": [
+      "Locked fact: ATLS (Advanced Trauma Life Support) primary survey order is ABCDE: Airway, Breathing, Circulation, Disability (neuro), Exposure. This sequence is never altered in trauma prose for dramatic effect.",
+      "Locked fact: RSI drug dosing is weight-based and indication-specific. Succinylcholine is contraindicated in hyperkalemia, burns >24h, crush injuries >5 days, and neuromuscular disease. This is never dramatized as universal.",
+      "Locked fact: CPR compression rate is 100–120/minute, depth 5–6 cm in adults. Defibrillation dose: 200J biphasic initial shock for VF/pVT. These parameters are never adjusted for narrative convenience.",
+      "Locked fact: Massive transfusion protocol ratios (1:1:1 pRBC:FFP:platelets) reflect current damage control resuscitation evidence. The rationale for balanced component therapy is preserved in all hemorrhagic shock narratives.",
+      "Locked fact: The \"Golden Hour\" concept applies to trauma but is not a rigid cutoff — it is a framework for urgency, not a hard survival threshold at 60 minutes."
+    ]
+  }
+}
+    </script>
+    <link rel="canonical" href="https://brainsait.de/my-novel/vol06.html">
+    <link rel="alternate" hreflang="x-default" href="https://brainsait.cloud/my-novel/vol06.html">
+
+
+<body>
+<header role="banner" class="site-header">
+  <div class="header-logo">Trauma<em>Forge</em></div>
+  <nav class="header-nav"><a href="vol05.html">← Vol. 05</a><a href="index.html">All Volumes</a><a href="vol07.html">Vol. 07 →</a></nav>
+  <div class="header-tag">Vol. 06 · Emergency Medicine</div>
+</header>
+<main role="main">
+
+<div class="hero fade">
+  <div class="hero-vol">PulseForge Series · Volume 06 of 12</div>
+  <div class="hero-kicker">Emergency Medicine · BrainSAIT Cinematic Medical Novelist Engine</div>
+  <span class="hero-emoji">⚡</span>
+  <h1 class="hero-title">Trauma<em>Forge</em></h1>
+  <p class="hero-sub">Where triage meets war literature.</p>
+  <p class="hero-sub-ar" lang="ar">رواية الطوارئ — حيث يلتقي الفرز الطبي بأدب الحرب</p>
+  <p class="hero-tagline">"The ER doesn't have a waiting room — it has a battlefield. Every shift is a novel that begins with the ambulance doors opening and ends twelve hours later, unresolved."</p>
+  <p class="hero-tagline-ar" lang="ar">الطوارئ ليس لها غرفة انتظار — لها ساحة معركة. كل وردية رواية تبدأ بانفتاح أبواب الإسعاف وتنتهي بعد اثنتي عشرة ساعة، دون حل.</p>
+  <div class="waveform-wrap">
+    <svg aria-hidden="true" focusable="false" class="waveform-svg" viewBox="0 0 900 60" preserveAspectRatio="none">
+      <polyline class="waveform-line" points="0,30 20,30 25,5 30,55 35,30 60,30 65,8 70,52 75,30 100,30 105,3 112,57 118,30 145,30 150,10 156,50 162,30 190,30 195,6 202,54 208,30 235,30 240,4 248,56 254,30 280,30 285,7 292,53 298,30 325,30 330,5 337,55 343,30 370,30 375,8 382,52 388,30 415,30 420,4 428,56 434,30 460,30 465,6 472,54 478,30 505,30 510,7 517,53 523,30 550,30 555,5 562,55 568,30 595,30 600,8 607,52 613,30 640,30 645,4 652,56 658,30 685,30 690,6 697,54 703,30 730,30 735,7 742,53 748,30 775,30 780,5 787,55 793,30 820,30 825,8 832,52 838,30 865,30 870,4 878,56 884,30 900,30"/>
+    </svg>
+  </div>
+  <div class="badge-row">
+    <span class="badge">Vital Signs Wave</span><span class="badge">Accent #dc2626</span><span class="badge">Drama Temp 0.90</span><span class="badge">War Novel</span><span class="badge">Bilingual EN+AR</span>
+  </div>
+</div>
+
+<div class="page">
+
+<section class="fade">
+  <div class="sec-label">A — Product Vision</div>
+  <h2 class="sec-title">The ER as<br><em>battlefield.</em></h2>
+  <div class="bilingual"><div class="vision-block">
+    <p><strong>TraumaForge</strong> is the cinematic medical novelist engine for emergency medicine — a tool that transforms the clinical language of triage scores, ATLS protocols, shock states, and rapid sequence intubation into prose that reads like a war novel written by a physician who has stood at the intersection of life and death for twelve consecutive hours and has no plans to stop.</p>
+    <p>Emergency medicine is the specialty of first contact and last resort — the specialty where decisions are made with incomplete information, under time pressure, with the highest possible stakes. The emergency physician cannot wait for more data. They cannot wait for the specialist to arrive. They must act on what they have, in the time they have, with the resources they have.</p>
+    <p><strong>TraumaForge does not describe emergency protocols.</strong> It dramatizes the cognitive and moral experience of making life-or-death decisions in real time — the triage decision that determines who waits, the airway decision that determines who breathes, the code decision that determines who continues.</p>
+  </div>
+  <div class="vision-ar" lang="ar">
+    <p>TraumaForge هو محرك الروائي الطبي السينمائي لطب الطوارئ — يحوّل اللغة السريرية لدرجات الفرز وبروتوكولات ATLS وحالات الصدمة إلى نثر يُقرأ كرواية حرب كتبها طبيب وقف عند تقاطع الحياة والموت لاثنتي عشرة ساعة متواصلة.</p>
+    <p>TraumaForge لا يصف بروتوكولات الطوارئ. بل يُدرّج التجربة المعرفية والأخلاقية لاتخاذ قرارات حياة أو موت في الوقت الفعلي.</p>
+  </div></div>
+</section>
+
+<hr class="rule">
+
+<section class="fade">
+  <div class="sec-label">B — Three-Lens Transmutation</div>
+  <h2 class="sec-title">The ER's<br><em>twelve hours.</em></h2>
+
+  <div class="lens-card l1">
+    <div class="lens-label">Lens 1 — Dramatic · Triage as Moral Philosophy</div>
+    <div class="lens-fact">RAW FACT: The START triage system (Simple Triage and Rapid Treatment) classifies patients as Immediate (red), Delayed (yellow), Minimal (green), or Expectant (black) — those unlikely to survive even with treatment. In mass casualty events, resources are allocated away from the most severely injured.</div>
+    <div class="lens-en">
+      The black tag does not mean this patient will not receive care. <strong>It means this patient will not receive care first.</strong> And in a mass casualty event where there are seven patients with black tags and two physicians and twelve minutes of collective attention, first is the only thing that matters.<br><br>
+      The triage physician walks the line between science and philosophy with every tag they place. The red tag says: this person can be saved and must be saved now. The black tag says: this person cannot be saved with the resources available, and saving them would cost the lives of those who can be saved. It is not abandonment. It is arithmetic. It is the calculus of the possible.<br><br>
+      No one trains for the moment they look at a human being — a person with a name, with a family somewhere, with a life that existed before this ambulance — and write them off. Not because they are worthless. Because saving them would be too expensive for everyone else. <em>The black tag is the most moral decision in emergency medicine. It is also the one that never goes away.</em>
+    </div>
+    <div class="div"></div>
+    <div class="lens-ar" lang="ar">العلامة السوداء لا تعني أن هذا المريض لن يتلقى رعاية. تعني أنه لن يتلقاها أولاً. وفي حادثة ضحايا جماعية حيث يوجد سبعة مرضى بعلامات سوداء وطبيبان فقط، "الأول" هو الشيء الوحيد المهم. لا أحد يتدرب على اللحظة التي ينظر فيها إلى إنسان — شخص له اسم، وعائلة في مكان ما — ويشطبه. ليس لأنه عديم القيمة. بل لأن إنقاذه سيكون مكلفاً جداً بالنسبة للجميع. العلامة السوداء هي القرار الأكثر أخلاقية في طب الطوارئ. وهي أيضاً التي لا تختفي أبداً.</div>
+  </div>
+
+  <div class="lens-card l2">
+    <div class="lens-label">Lens 2 — Eventful · Rapid Sequence Intubation as Combat Operation</div>
+    <div class="lens-fact">RAW FACT: Rapid Sequence Intubation (RSI) uses a sedative agent followed immediately by a neuromuscular blocking agent to achieve optimal intubation conditions. It induces complete apnea. The physician has typically 3–5 minutes before dangerous hypoxia.</div>
+    <div class="lens-en">
+      RSI is the most consequential ninety seconds in emergency medicine. <strong>You give the drugs. You paralyze the patient. You have removed their ability to breathe. Now you must intubate — and you must succeed.</strong><br><br>
+      The sequence is scripted: etomidate 0.3 mg/kg IV push. Succinylcholine 1.5 mg/kg. Thirty seconds of onset. The jaw goes slack. The chest stops moving. The room goes quiet in the particular way that rooms go quiet when everyone in them knows that something irreversible has just happened. The patient is apneic. They are now breathing on their schedule — which is: none. Their oxygen saturation begins its inevitable descent.<br><br>
+      The laryngoscope goes in. The cords should be there. They are. Tube goes through. CO₂ rises on the capnography. Breath sounds bilaterally. The saturation stops falling. The room breathes again. But for ninety seconds, the most critical ninety seconds of this patient's life, the physician held the sole responsibility for a human airway — and everything that went with it.
+    </div>
+    <div class="div"></div>
+    <div class="lens-ar" lang="ar">التتابع السريع للتنبيب هو التسعون ثانية الأكثر أهمية في طب الطوارئ. تُعطي الأدوية. تُشلّ المريض. لقد أزلت قدرته على التنفس. والآن يجب أن تُنبّبه — ويجب أن تنجح. الفك يرتخي. الصدر يتوقف عن الحركة. الغرفة تصمت بالطريقة التي تصمت بها الغرف حين يعرف الجميع فيها أن شيئاً لا رجعة فيه قد حدث للتو. المريض واقف عن التنفس. لتسعين ثانية، حمل الطبيب وحده مسؤولية مجرى هواء بشري — وكل ما صاحبه.</div>
+  </div>
+
+  <div class="lens-card l3">
+    <div class="lens-label">Lens 3 — Hook · The Code at 3 AM</div>
+    <div class="lens-fact">RAW FACT: Survival rates from out-of-hospital cardiac arrest average 10–12% globally. In-hospital cardiac arrest survival to discharge is approximately 25%. Every minute without CPR decreases survival by 10%. Every minute without defibrillation decreases it by 7–10%.</div>
+    <div class="lens-en">
+      At 3:12 AM, the monitor flatlines. The code is called. The team assembles with the speed of people who have rehearsed this moment a thousand times and never get used to it.<br><br>
+      CPR begins — 100 compressions per minute, 5-6 cm depth, full chest recoil. Someone counts. Someone manages the airway. Someone draws the epinephrine. Someone watches the monitor for a shockable rhythm. The algorithm runs in the physician's mind like a second heartbeat: two minutes of CPR, rhythm check, shock if indicated, resume CPR, epinephrine every 3-5 minutes, treat reversible causes. H's and T's.<br><br>
+      <strong>The mathematics are brutal:</strong> every minute without defibrillation decreases survival by 7-10%. They are at minute four. The room knows this. No one says it. The compressions continue. The monitor shows VF — a shockable rhythm. The shock is delivered at 200J. The rhythm converts. A pulse returns. The room breathes.<br><br>
+      <em>The global survival rate from out-of-hospital cardiac arrest is 10%. This patient is in that 10%. For now. The 3 AM will not tell you what happens at 3 AM the following morning.</em>
+    </div>
+    <div class="div"></div>
+    <div class="lens-ar" lang="ar">الساعة 3:12 صباحاً. الشاشة تُسطّح. تُعلن الشيفرة. الفريق يتجمع بسرعة أشخاص مرّنوا هذه اللحظة ألف مرة ولم يعتادوا عليها قط. الرياضيات قاسية: كل دقيقة بلا صعق كهربائي تقلل البقاء بـ7-10%. هم في الدقيقة الرابعة. الغرفة تعرف هذا. لا أحد يقوله. الضغطات تستمر. معدل البقاء العالمي من توقف القلب خارج المستشفى هو 10%. هذا المريض في ذلك الـ10%. في الوقت الحالي.</div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section class="fade">
+  <div class="sec-label">C — The Architect</div>
+  <h2 class="sec-title">Three acts.<br><em>One shift.</em></h2>
+  <div class="act-grid">
+    <div class="act-cell">
+      <div class="act-num">Act I — The Arrival</div>
+      <div class="act-title">The Ambulance Doors</div>
+      <div class="act-scene">"The paramedic said: 'GCS 8, BP 80/50, HR 130, mechanism blunt abdominal trauma, fall from scaffold at 6 meters.' He was still saying it when the trauma team moved. There was no pause between the handover and the action. The ER does not have a moment between receiving information and using it."</div>
+      <div class="act-clinical">32-year-old male · Blunt abdominal trauma · 6m fall<br>GCS 8 · BP 80/50 · HR 130 · SpO₂ 91%<br>FAST positive: free fluid periumbilical</div>
+    </div>
+    <div class="act-cell">
+      <div class="act-num">Act II — The Resuscitation</div>
+      <div class="act-title">The Simultaneous Everything</div>
+      <div class="act-scene">"Two large-bore IVs placed simultaneously — one in each antecubital. Massive transfusion protocol activated. RSI performed in 4 minutes from arrival. FAST showed free fluid in Morrison's pouch — a lot of it. The surgical team was already scrubbing. The ER physician's job, in this moment, was to keep the patient alive long enough for surgery to happen."</div>
+      <div class="act-clinical">MTP 1:1:1 activated · RSI successful<br>FAST: free fluid Morrison's + perisplenic<br>CT abdomen: splenic laceration Grade IV · hemoperitoneum</div>
+    </div>
+    <div class="act-cell">
+      <div class="act-num">Act III — The Handover</div>
+      <div class="act-title">The Transfer of Care</div>
+      <div class="act-scene">"At OR suite 3, the EM physician gave the SBAR to the anesthesiologist in forty-five seconds. Then they stepped back. The surgeons moved in. The ER physician walked back to the department. There were eleven other patients waiting. The handover was complete — the story continued without them, in a room they would never see the inside of again."</div>
+      <div class="act-clinical">OR: splenectomy · 3.2L hemoperitoneum evacuated<br>Post-op ICU admission · Stable at 24 hours<br>EM physician back to department: 11 patients waiting</div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section class="fade">
+  <div class="sec-label">D — The Ghost Doctor</div>
+  <h2 class="sec-title">CLINICALLINC<br><em>runs the algorithm.</em></h2>
+  <div class="ghost-block">
+    <div class="ghost-header">👻 CLINICALLINC · Emergency Medicine Accuracy Specifications</div>
+    <div class="ghost-row"><span class="ghost-check">✓</span><span class="ghost-text"><strong>Locked fact:</strong> ATLS (Advanced Trauma Life Support) primary survey order is ABCDE: Airway, Breathing, Circulation, Disability (neuro), Exposure. This sequence is never altered in trauma prose for dramatic effect.</span></div>
+    <div class="ghost-row"><span class="ghost-check">✓</span><span class="ghost-text"><strong>Locked fact:</strong> RSI drug dosing is weight-based and indication-specific. Succinylcholine is contraindicated in hyperkalemia, burns >24h, crush injuries >5 days, and neuromuscular disease. This is never dramatized as universal.</span></div>
+    <div class="ghost-row"><span class="ghost-check">✓</span><span class="ghost-text"><strong>Locked fact:</strong> CPR compression rate is 100–120/minute, depth 5–6 cm in adults. Defibrillation dose: 200J biphasic initial shock for VF/pVT. These parameters are never adjusted for narrative convenience.</span></div>
+    <div class="ghost-row"><span class="ghost-check">✓</span><span class="ghost-text"><strong>Locked fact:</strong> Massive transfusion protocol ratios (1:1:1 pRBC:FFP:platelets) reflect current damage control resuscitation evidence. The rationale for balanced component therapy is preserved in all hemorrhagic shock narratives.</span></div>
+    <div class="ghost-row"><span class="ghost-check">✓</span><span class="ghost-text"><strong>Locked fact:</strong> The "Golden Hour" concept applies to trauma but is not a rigid cutoff — it is a framework for urgency, not a hard survival threshold at 60 minutes.</span></div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section class="fade">
+  <div class="sec-label">E — The Interface</div>
+  <h2 class="sec-title">The Alchemy<br><em>Studio.</em></h2>
+  <div class="iface-grid">
+    <div class="iface-card"><div class="iface-icon">🚨</div><div class="iface-title">Triage Narrative Generator</div><div class="iface-desc">Input a patient's vital signs and mechanism of injury, and the engine generates both the clinical triage decision and the <em>human narrative</em> of that patient — who they are beyond the numbers, what brought them to this moment.</div></div>
+    <div class="iface-card"><div class="iface-icon">⏱️</div><div class="iface-title">Real-Time Drama Engine</div><div class="iface-desc">Emergency medicine operates in minutes. The engine generates prose in <em>compressed time</em> — each paragraph is a minute, each sentence a decision. The reader experiences the temporal pressure of the resuscitation bay.</div></div>
+    <div class="iface-card"><div class="iface-icon">🧑‍⚕️</div><div class="iface-title">Team Dynamics Narrator</div><div class="iface-desc">A trauma activation involves 8–12 people with defined roles. The engine narrates the resuscitation as an <em>ensemble piece</em> — each team member's action, their decision, their internal state, composited into a single cinematic sequence.</div></div>
+    <div class="iface-card"><div class="iface-icon">📋</div><div class="iface-title">Case Debrief Storyteller</div><div class="iface-desc">Post-code and post-trauma debriefs are told as <em>literary analysis</em> — what happened, what was done well, what could have been different — in prose that honors the clinical reasoning and the emotional aftermath equally.</div></div>
+    <div class="iface-card"><div class="iface-icon">🌙</div><div class="iface-title">Night Shift Chronicle</div><div class="iface-desc">A twelve-hour overnight shift as a novel chapter: the patients, the decisions, the moments of unexpected grace, the moments of failure. Every EM shift is a story. The engine makes it readable by morning.</div></div>
+    <div class="iface-card"><div class="iface-icon">🌐</div><div class="iface-title">Arabic War Literature Register</div><div class="iface-desc">Arabic emergency medicine prose draws from the tradition of Arabic war poetry and resistance literature — <em>the urgency of al-Mutanabbi, the precision of al-Jahiz</em> — to create a register that is native to Arabic literary tradition.</div></div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section class="fade">
+  <div class="sec-label">F — The Metrics</div>
+  <h2 class="sec-title">What success<br><em>looks like.</em></h2>
+  <div class="metrics-row">
+    <div class="metric"><div class="metric-n">90s</div><div class="metric-l">RSI window<br>dramatized per scene</div></div>
+    <div class="metric"><div class="metric-n">10%</div><div class="metric-l">OHCA survival rate<br>the 10% that matters</div></div>
+    <div class="metric"><div class="metric-n">12h</div><div class="metric-l">One shift<br>one novel chapter</div></div>
+    <div class="metric"><div class="metric-n">2</div><div class="metric-l">Languages · Literary<br>quality in both</div></div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section class="fade">
+  <div class="sec-label">G — The Library</div>
+  <h2 class="sec-title">Three novels.<br><em>The long shift.</em></h2>
+  <div class="lib-grid">
+    <div class="novel-card">
+      <div class="novel-n">01</div>
+      <div>
+        <div class="novel-en">Black Tag</div>
+        <div class="novel-ar" lang="ar">العلامة السوداء</div>
+        <div class="novel-p">A mass casualty event — a building collapse — seen from the perspective of the triage physician who places the black tags. The novel follows five patients across a single night: three red, one yellow, one black. The black tag patient survives. The triage physician has to live with the decision they made, and the outcome that proved them wrong, for the rest of their career.</div>
+        <div class="novel-tags"><span class="novel-tag">Mass Casualty</span><span class="novel-tag">Triage Ethics</span><span class="novel-tag">Temp 0.85</span><span class="novel-tag">EN+AR</span></div>
+      </div>
+    </div>
+    <div class="novel-card">
+      <div class="novel-n">02</div>
+      <div>
+        <div class="novel-en">3:12 AM</div>
+        <div class="novel-ar" lang="ar">الثالثة والثانية عشرة صباحاً</div>
+        <div class="novel-p">A cardiac arrest at 3:12 AM, told in real time — minute by minute, compression by compression, drug by drug. The novel is thirty minutes long. Every sentence is a decision. Every paragraph is a minute of CPR. The patient's identity is revealed in the final chapter, which takes place in the ICU three weeks later.</div>
+        <div class="novel-tags"><span class="novel-tag">Cardiac Arrest</span><span class="novel-tag">Real-Time Narrative</span><span class="novel-tag">Temp 0.90</span><span class="novel-tag">EN+AR</span></div>
+      </div>
+    </div>
+    <div class="novel-card">
+      <div class="novel-n">03</div>
+      <div>
+        <div class="novel-en">The Handover</div>
+        <div class="novel-ar" lang="ar">التسليم</div>
+        <div class="novel-p">A twelve-hour overnight EM shift, structured as a relay race. The outgoing team hands over to the incoming team at 7 AM. The novel is the handover conversation — forty-five minutes in which two physicians communicate everything that happened to eighteen patients over the preceding twelve hours. The entire overnight, condensed into a morning meeting that decides who lives and who waits.</div>
+        <div class="novel-tags"><span class="novel-tag">Overnight EM</span><span class="novel-tag">Ensemble</span><span class="novel-tag">Temp 0.75</span><span class="novel-tag">EN+AR</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="vol-nav fade">
+  <a href="vol05.html">← Vol. 05 — ShadowForge</a>
+  <a class="center" href="index.html">PulseForge Series</a>
+  <a href="vol07.html">Vol. 07 — BoneForge →</a>
+</div>
+</div>
+
+</main>
+<footer role="contentinfo">
+  <div class="footer-brand">Trauma<em>Forge</em></div>
+  <div class="footer-meta">Vol. 06 · Emergency Medicine<br>BrainSAIT × Cinematic Medical Novelist Engine v1.0<br>© 2025 BrainSAIT · All rights reserved</div>
+</footer>
+<script>
+const obs = new IntersectionObserver(entries => { entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('on'); }); }, { threshold:0.06 });
+document.querySelectorAll('.fade').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

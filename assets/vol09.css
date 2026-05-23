@@ -1,0 +1,998 @@
+:root { --midnight:#0a0f1e; --deep-navy:#0d1529; --signal-teal:#00c9b8; --ecg-green:#00ff88; --cream:#f5f0e8; --gold:#c9a84c; --accent:#059669; --glass:rgba(255,255,255,0.03); }
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { background:var(--midnight); color:var(--cream); font-family:'Cormorant Garamond',serif; overflow-x:hidden; }
+body::before { content:''; position:fixed; inset:0; z-index:0; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='512' height='512' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E"); opacity:0.3; pointer-events:none; }
+.site-header { position:sticky; top:0; z-index:100; background:rgba(10,15,30,0.95); backdrop-filter:blur(16px); border-bottom:1px solid rgba(245,240,232,0.07); padding:16px 40px; display:flex; align-items:center; justify-content:space-between; }
+.header-logo { font-family:'Playfair Display',serif; font-size:20px; font-weight:900; }
+.header-logo em { color:var(--accent); font-style:italic; }
+.header-nav { display:flex; gap:24px; }
+.header-nav a { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:rgba(245,240,232,0.35); text-decoration:none; transition:color 0.2s; }
+.header-nav a:hover { color:var(--accent); }
+.header-tag { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--accent); opacity:0.8; }
+.hero { text-align:center; padding:100px 24px 80px; position:relative; z-index:10; background:radial-gradient(ellipse 70% 50% at 50% 20%, rgba(5,150,105,0.10) 0%, transparent 70%); }
+.hero-vol { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:5px; text-transform:uppercase; color:rgba(245,240,232,0.25); margin-bottom:16px; }
+.hero-kicker { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:5px; text-transform:uppercase; color:var(--signal-teal); margin-bottom:20px; }
+.hero-emoji { font-size:72px; margin-bottom:24px; display:block; animation:infiltrate 3s ease-in-out infinite; }
+@keyframes infiltrate { 0%,100%{transform:scale(1) rotate(0deg)} 33%{transform:scale(1.05) rotate(-5deg)} 66%{transform:scale(0.97) rotate(5deg)} }
+.hero-title { font-family:'Playfair Display',serif; font-size:clamp(52px,8vw,96px); font-weight:900; line-height:0.92; letter-spacing:-3px; margin-bottom:16px; }
+.hero-title em { color:var(--accent); font-style:italic; }
+.hero-sub { font-size:20px; font-weight:300; font-style:italic; color:rgba(245,240,232,0.5); margin-bottom:8px; }
+.hero-sub-ar { font-family:'IBM Plex Sans Arabic',sans-serif; font-size:16px; direction:rtl; color:rgba(245,240,232,0.3); margin-bottom:40px; }
+.hero-tagline { font-family:'Playfair Display',serif; font-size:22px; font-style:italic; color:rgba(245,240,232,0.65); max-width:640px; margin:0 auto 48px; line-height:1.5; }
+.hero-tagline-ar { font-family:'IBM Plex Sans Arabic',sans-serif; font-size:16px; direction:rtl; color:rgba(245,240,232,0.35); max-width:640px; margin:0 auto 60px; line-height:1.9; }
+.waveform-wrap { width:100%; max-width:900px; margin:0 auto 60px; height:60px; }
+.waveform-svg { width:100%; height:100%; }
+.waveform-line { stroke:var(--accent); stroke-width:1.8; fill:none; stroke-dasharray:1400; stroke-dashoffset:1400; animation:draw 3s ease forwards; }
+@keyframes draw { to { stroke-dashoffset:0; } }
+.badge-row { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-bottom:60px; }
+.badge { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; padding:6px 14px; border:1px solid rgba(5,150,105,0.3); color:rgba(5,150,105,0.7); }
+.page { position:relative; z-index:10; max-width:1100px; margin:0 auto; padding:80px 32px; }
+.sec-label { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:4px; text-transform:uppercase; color:var(--signal-teal); margin-bottom:14px; display:flex; align-items:center; gap:12px; }
+.sec-label::before { content:''; width:32px; height:1px; background:var(--signal-teal); opacity:0.6; }
+.sec-title { font-family:'Playfair Display',serif; font-size:clamp(28px,4vw,50px); font-weight:700; line-height:1.05; letter-spacing:-1px; margin-bottom:20px; }
+.sec-title em { color:var(--gold); font-style:italic; }
+.sec-body { font-size:16px; line-height:1.85; color:rgba(245,240,232,0.55); font-weight:300; margin-bottom:48px; max-width:800px; }
+.rule { border:none; border-top:1px solid rgba(245,240,232,0.07); margin:80px 0; }
+.vision-block { background:var(--glass); border:1px solid rgba(5,150,105,0.15); border-left:3px solid var(--accent); padding:44px 48px; margin-top:40px; }
+.vision-block p { font-size:18px; line-height:1.95; color:rgba(245,240,232,0.75); font-weight:300; margin-bottom:24px; }
+.vision-block p:last-child { margin-bottom:0; }
+.vision-block strong { color:var(--gold); font-weight:600; }
+.vision-ar { background:var(--glass); border:1px solid rgba(201,168,76,0.12); border-right:3px solid var(--gold); padding:36px 44px; margin-top:16px; direction:rtl; }
+.vision-ar p { font-family:'IBM Plex Sans Arabic',sans-serif; font-size:16px; line-height:2.1; color:rgba(245,240,232,0.6); margin-bottom:20px; }
+.vision-ar p:last-child { margin-bottom:0; }
+.lens-card { background:#060a12; border:1px solid rgba(255,255,255,0.06); padding:44px 48px; margin-top:32px; position:relative; overflow:hidden; }
+.lens-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; }
+.l1::before { background:linear-gradient(to right,var(--accent),transparent); }
+.l2::before { background:linear-gradient(to right,var(--signal-teal),transparent); }
+.l3::before { background:linear-gradient(to right,var(--gold),transparent); }
+.lens-label { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:3px; text-transform:uppercase; margin-bottom:8px; }
+.l1 .lens-label { color:var(--accent); } .l2 .lens-label { color:var(--signal-teal); } .l3 .lens-label { color:var(--gold); }
+.lens-fact { font-family:'JetBrains Mono',monospace; font-size:12px; color:rgba(245,240,232,0.3); margin-bottom:24px; padding:12px 16px; background:rgba(0,0,0,0.3); border-left:2px solid rgba(255,255,255,0.08); }
+.lens-en { font-size:19px; line-height:2; color:rgba(245,240,232,0.88); font-weight:300; margin-bottom:28px; font-style:italic; }
+.lens-en strong { color:var(--cream); font-weight:600; font-style:normal; }
+.div { width:60px; height:1px; background:rgba(245,240,232,0.1); margin:28px 0; }
+.lens-ar { font-family:'IBM Plex Sans Arabic',sans-serif; font-size:16px; line-height:2.2; color:rgba(245,240,232,0.55); direction:rtl; }
+.act-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:rgba(245,240,232,0.07); margin-top:40px; }
+.act-cell { background:var(--deep-navy); padding:36px 28px; }
+.act-num { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:rgba(245,240,232,0.2); margin-bottom:12px; }
+.act-title { font-family:'Playfair Display',serif; font-size:18px; font-weight:700; color:var(--accent); margin-bottom:16px; }
+.act-scene { font-size:15px; line-height:1.8; color:rgba(245,240,232,0.65); margin-bottom:14px; font-style:italic; }
+.act-clinical { font-family:'JetBrains Mono',monospace; font-size:11px; color:rgba(245,240,232,0.3); line-height:1.7; }
+.ghost-block { background:#020509; border:1px solid rgba(0,255,136,0.12); border-left:3px solid var(--ecg-green); padding:40px 44px; margin-top:40px; }
+.ghost-header { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--ecg-green); margin-bottom:24px; }
+.ghost-row { display:flex; gap:16px; margin-bottom:16px; align-items:flex-start; }
+.ghost-check { color:var(--ecg-green); font-family:'JetBrains Mono',monospace; font-size:12px; flex-shrink:0; }
+.ghost-text { font-size:15px; line-height:1.75; color:rgba(245,240,232,0.6); }
+.ghost-text strong { color:var(--cream); font-weight:600; }
+.iface-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:24px; margin-top:40px; }
+.iface-card { background:var(--glass); border:1px solid rgba(245,240,232,0.07); padding:32px 28px; }
+.iface-icon { font-size:28px; margin-bottom:16px; }
+.iface-title { font-family:'Playfair Display',serif; font-size:17px; font-weight:700; margin-bottom:10px; }
+.iface-desc { font-size:14px; line-height:1.75; color:rgba(245,240,232,0.5); }
+.iface-desc em { color:var(--signal-teal); font-style:normal; }
+.metrics-row { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:rgba(245,240,232,0.06); border:1px solid rgba(245,240,232,0.06); margin-top:40px; }
+.metric { background:var(--deep-navy); padding:36px 24px; text-align:center; }
+.metric-n { font-family:'Playfair Display',serif; font-size:44px; font-weight:900; line-height:1; background:linear-gradient(135deg,var(--gold),var(--accent)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:10px; }
+.metric-l { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:rgba(245,240,232,0.35); line-height:1.6; }
+.lib-grid { display:grid; gap:20px; margin-top:40px; }
+.novel-card { background:var(--glass); border:1px solid rgba(245,240,232,0.08); padding:36px 40px; display:grid; grid-template-columns:auto 1fr; gap:0 32px; align-items:start; }
+.novel-n { font-family:'Playfair Display',serif; font-size:48px; font-weight:900; color:rgba(5,150,105,0.2); line-height:1; }
+.novel-en { font-family:'Playfair Display',serif; font-size:22px; font-weight:700; font-style:italic; margin-bottom:6px; }
+.novel-ar { font-family:'IBM Plex Sans Arabic',sans-serif; font-size:15px; direction:rtl; color:rgba(245,240,232,0.4); margin-bottom:14px; }
+.novel-p { font-size:14px; line-height:1.75; color:rgba(245,240,232,0.5); font-style:italic; }
+.novel-tags { display:flex; flex-wrap:wrap; gap:8px; margin-top:16px; }
+.novel-tag { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:1px; padding:3px 10px; border:1px solid rgba(245,240,232,0.1); color:rgba(245,240,232,0.35); }
+.vol-nav { display:flex; justify-content:space-between; align-items:center; padding:32px 0; border-top:1px solid rgba(245,240,232,0.07); margin-top:80px; }
+.vol-nav a { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; text-decoration:none; color:rgba(245,240,232,0.35); transition:color 0.2s; }
+.vol-nav a:hover,.vol-nav .center { color:var(--signal-teal); }
+footer { border-top:1px solid rgba(245,240,232,0.07); padding:60px 40px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:24px; position:relative; z-index:10; }
+.footer-brand { font-family:'Playfair Display',serif; font-size:28px; font-weight:900; }
+.footer-brand em { color:var(--accent); font-style:italic; }
+.footer-meta { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:rgba(245,240,232,0.2); text-align:right; line-height:1.9; }
+.fade { opacity:0; transform:translateY(24px); transition:opacity 0.7s ease,transform 0.7s ease; }
+.fade.on { opacity:1; transform:translateY(0); }
+@media(max-width:800px){ .act-grid{grid-template-columns:1fr;} .iface-grid{grid-template-columns:1fr;} .metrics-row{grid-template-columns:repeat(2,1fr);} .novel-card{grid-template-columns:1fr;} }
+
+    .bilingual > .vision-block,.bilingual > .vision-ar{flex:1}    
+    @media(max-width:900px){.bilingual{flex-direction:column}}
+
+
+
+    <!-- CLINICALLINC-METADATA -->
+    <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "CreativeWork",
+  "name": "DoseForge — Vol. 09 · Pharmacology · BrainSAIT",
+  "description": "Where drug mechanisms meet espionage plots.",
+  "inLanguage": [
+    "en",
+    "ar"
+  ],
+  "isPartOf": {
+    "@type": "Series",
+    "name": "PulseForge Series"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "BrainSAIT",
+    "url": "https://brainsait.de"
+  },
+  "url": "https://brainsait.de/my-novel/vol09.html",
+  "sameAs": [
+    "https://brainsait.cloud/my-novel/vol09.html"
+  ],
+  "clincallinc": {
+    "version": "1.0",
+    "lockedFacts": [
+      "Locked fact: CYP450 enzyme systems and their major substrates, inhibitors, and inducers are clinically accurate in all prose. Fluconazole inhibits CYP2C9 and CYP3A4. Rifampicin induces CYP3A4, 2C9, 2C19. These interactions are never invented for narrative effect.",
+      "Locked fact: Therapeutic drug monitoring targets: Vancomycin AUC/MIC 400–600 (current guidance) or trough 10–20 mg/L (older guidance); Lithium 0.6–1.0 mmol/L; Digoxin 0.5–2.0 ng/mL; Phenytoin 10–20 mg/L.",
+      "Locked fact: The piperacillin-tazobactam + vancomycin nephrotoxicity interaction is real and documented. The prose never invents drug interactions — it uses only evidence-based interactions from current literature.",
+      "Locked fact: First-pass metabolism affects bioavailability of oral drugs that are extensively extracted by the liver. IV administration bypasses first-pass. The prose never conflates oral and IV bioavailability without acknowledging the route difference.",
+      "Locked fact: Receptor pharmacology — agonists, partial agonists, antagonists, inverse agonists — is mechanistically accurate. The \"lock and key\" metaphor is used only as an entry point, not as a final explanation of receptor dynamics."
+    ]
+  }
+}
+    </script>
+    <link rel="canonical" href="https://brainsait.de/my-novel/vol09.html">
+    <link rel="alternate" hreflang="x-default" href="https://brainsait.cloud/my-novel/vol09.html">
+
+
+<body>
+<header role="banner" class="site-header">
+  <div class="header-logo">Dose<em>Forge</em></div>
+  <nav class="header-nav"><a href="vol08.html">← Vol. 08</a><a href="index.html">All Volumes</a><a href="vol10.html">Vol. 10 →</a></nav>
+  <div class="header-tag">Vol. 09 · Pharmacology</div>
+</header>
+<main role="main">
+
+<div class="hero fade">
+  <div class="hero-vol">PulseForge Series · Volume 09 of 12</div>
+  <div class="hero-kicker">Pharmacology · BrainSAIT Cinematic Medical Novelist Engine</div>
+  <span class="hero-emoji">💊</span>
+  <h1 class="hero-title">Dose<em>Forge</em></h1>
+  <p class="hero-sub">Where drug mechanisms meet espionage plots.</p>
+  <p class="hero-sub-ar" lang="ar">رواية الجرعة والمصير — حيث تلتقي آليات الدواء بروايات التجسس</p>
+  <p class="hero-tagline">"Every molecule is an agent. Every receptor is a handler. Every drug interaction is a double-cross in progress — and the patient's body is the territory being fought over."</p>
+  <p class="hero-tagline-ar" lang="ar">كل جزيء عميل. كل مستقبل مشغّل. كل تفاعل دوائي خيانة جارية — وجسم المريض هو الأرض التي يُقاتَل عليها.</p>
+  <div class="waveform-wrap">
+    <svg aria-hidden="true" focusable="false" class="waveform-svg" viewBox="0 0 900 60" preserveAspectRatio="none">
+      <polyline class="waveform-line" points="0,50 50,48 80,45 100,20 120,15 140,18 160,25 180,30 220,30 250,28 280,10 300,5 320,8 340,18 360,30 400,30 430,28 460,10 480,5 500,8 520,20 540,30 580,30 610,28 640,10 660,5 680,8 700,20 720,30 760,30 790,28 820,10 840,5 860,8 880,20 900,30"/>
+    </svg>
+  </div>
+  <div class="badge-row">
+    <span class="badge">PK/PD Curve</span><span class="badge">Accent #059669</span><span class="badge">Drama Temp 0.80</span><span class="badge">Espionage Thriller</span><span class="badge">Bilingual EN+AR</span>
+  </div>
+</div>
+
+<div class="page">
+
+<section class="fade">
+  <div class="sec-label">A — Product Vision</div>
+  <h2 class="sec-title">The drug<br><em>as agent.</em></h2>
+  <div class="bilingual"><div class="vision-block">
+    <p><strong>DoseForge</strong> is the cinematic medical novelist engine for pharmacology — a tool that transforms the clinical language of pharmacokinetics, receptor binding, drug interactions, and adverse effect profiles into prose that reads like an espionage thriller in which every molecule is an operative, every receptor a target, and every prescribing decision a strategic deployment of chemical intelligence into hostile biological territory.</p>
+    <p>Pharmacology is the science of intentional chemical intervention — the deliberate introduction of foreign molecules into a biological system with the intent of changing its behavior. Every drug has a mission. It must find its target. It must engage without causing collateral damage. It must complete its mission and exit cleanly. And in most cases, it must do this while being actively hunted by the body's own defense systems: hepatic metabolism, renal clearance, P-glycoprotein efflux.</p>
+    <p><strong>DoseForge does not describe drugs.</strong> It narrates missions. Each pharmacological concept — half-life, volume of distribution, first-pass metabolism, therapeutic index — becomes a chapter in an operational briefing for a molecule being deployed into the most complex, hostile, and adaptive terrain in biology: the human body.</p>
+  </div>
+  <div class="vision-ar" lang="ar">
+    <p>DoseForge هو محرك الروائي الطبي السينمائي للصيدلة — يحوّل لغة الحرائك الدوائية وارتباط المستقبلات والتفاعلات الدوائية إلى نثر يُقرأ كرواية تجسس يكون فيها كل جزيء عميلاً، وكل مستقبل هدفاً.</p>
+    <p>DoseForge لا يصف الأدوية. بل يروي المهام. كل مفهوم صيدلاني — نصف العمر، حجم التوزيع، التمثيل الغذائي الأولي — يصبح فصلاً في إحاطة عملياتية لجزيء يُنشر في أصعب تضاريس بيولوجية.</p>
+  </div></div>
+</section>
+
+<hr class="rule">
+
+<section class="fade">
+  <div class="sec-label">B — Three-Lens Transmutation</div>
+  <h2 class="sec-title">The molecule's<br><em>mission.</em></h2>
+
+  <div class="lens-card l1">
+    <div class="lens-label">Lens 1 — Dramatic · The Half-Life as a Clock</div>
+    <div class="lens-fact">RAW FACT: Drug half-life (t½) is the time required for drug concentration to decrease by 50%. After 4-5 half-lives, ~97% of a drug is eliminated. This governs dosing intervals, steady-state concentrations, and the clinical relevance of missed doses.</div>
+    <div class="lens-en">
+      Every drug is on a clock the moment it enters the body. Not the clock of the disease it is treating — that clock is different, measured in days or weeks. The drug's own clock is measured in hours. <strong>The half-life is the countdown.</strong><br><br>
+      After one half-life, half the drug is gone. After two half-lives, three-quarters. After four half-lives, 94%. After five, 97%. The plasma concentration curve is an exponential decay — perfectly mathematical, utterly indifferent to whether the patient has remembered to take the next dose.<br><br>
+      This is why dosing intervals exist. This is why "every 8 hours" is not arbitrary — it is calibrated to the drug's half-life, designed to maintain concentrations above the minimum effective concentration without allowing accumulation to toxic levels. Miss one dose. The concentration dips. The bacteria recover. The seizure returns. The clot reforms. <em>The drug's clock does not pause for a busy morning. The half-life is the most demanding schedule in medicine.</em>
+    </div>
+    <div class="div"></div>
+    <div class="lens-ar" lang="ar">كل دواء على ساعة منذ اللحظة التي يدخل فيها الجسم. نصف العمر هو العد التنازلي. بعد نصف عمر واحد، يختفي نصف الدواء. بعد خمسة أنصاف أعمار، 97%. هذا هو سبب وجود فترات الجرعات. هذا هو سبب أن "كل ثماني ساعات" ليس تعسفياً — إنه معايرة لنصف عمر الدواء. افوّت جرعة واحدة. تنخفض التركيز. البكتيريا تتعافى. النوبة تعود. الجلطة تتشكل مجدداً. ساعة الدواء لا تتوقف من أجل صباح مشغول.</div>
+  </div>
+
+  <div class="lens-card l2">
+    <div class="lens-label">Lens 2 — Eventful · The Drug Interaction as Double-Cross</div>
+    <div class="lens-fact">RAW FACT: Warfarin is metabolized by CYP2C9. CYP2C9 inhibitors (e.g. fluconazole) increase warfarin levels and INR. CYP2C9 inducers (e.g. rifampicin) decrease warfarin levels. A patient on stable warfarin who starts fluconazole for a fungal infection can develop a supratherapeutic INR and bleed.</div>
+    <div class="lens-en">
+      She had been on warfarin for three years. Stable INR of 2.4. Everything calibrated. Everything understood.<br><br>
+      Then the thrush appeared — a complication of her recent antibiotic course — and her GP prescribed fluconazole for seven days. A routine prescription. Entirely appropriate. The GP checked no interactions database. Warfarin was not the drug that was being changed. <strong>But fluconazole inhibits CYP2C9 — the enzyme that metabolizes warfarin.</strong><br><br>
+      Over the next five days, the warfarin concentration in her blood doubled. Then tripled. The INR on day 6 was 8.2. She had been experiencing easy bruising for two days, which she attributed to the fluconazole. On day 7, she presented to the emergency department with haematuria and a nosebleed that had lasted six hours. The warfarin had not changed. The dose had not changed. The drug itself had been double-crossed by the CYP450 system — a molecular ambush that the prescribing chain had not seen coming.
+    </div>
+    <div class="div"></div>
+    <div class="lens-ar" lang="ar">كانت على الوارفارين منذ ثلاث سنوات. INR مستقر 2.4. كل شيء معايَر. ثم ظهر داء المبيضات — مضاعفات من دورة المضادات الحيوية الأخيرة — ووصف طبيبها الفلوكونازول لسبعة أيام. وصفة روتينية. مناسبة تماماً. لكن الفلوكونازول يثبط CYP2C9 — الإنزيم الذي يستقلب الوارفارين. خلال خمسة أيام، تضاعف تركيز الوارفارين في دمها. ثم تضاعف ثلاث مرات. في اليوم السادس، كان INR 8.2. الوارفارين لم يتغير. الجرعة لم تتغير. الدواء نفسه تعرض لكمين جزيئي لم تره سلسلة الوصف الطبي قادمة.</div>
+  </div>
+
+  <div class="lens-card l3">
+    <div class="lens-label">Lens 3 — Hook · The Therapeutic Index as the Line Between Treatment and Poison</div>
+    <div class="lens-fact">RAW FACT: The therapeutic index (TI) = TD50/ED50 — the ratio of the toxic dose to the effective dose. Drugs with narrow therapeutic indices (lithium, digoxin, aminoglycosides, warfarin, phenytoin) require therapeutic drug monitoring because small deviations from target concentrations cause toxicity.</div>
+    <div class="lens-en">
+      The therapeutic index is the most dangerous number in pharmacology. It is the ratio between the dose that helps and the dose that harms — and for some drugs, that ratio is terrifyingly small.<br><br>
+      Digoxin. Lithium. Aminoglycosides. Phenytoin. Vancomycin. Each of these drugs has a therapeutic window that is measured not in multiples but in percentages. The therapeutic plasma concentration of digoxin is 0.5–2.0 ng/mL. The toxic concentration begins at 2.0 ng/mL. <strong>The line between treatment and poisoning is a single decimal point.</strong><br><br>
+      This is why therapeutic drug monitoring exists. This is why we measure plasma levels. Not because we distrust the pharmacokinetics — but because individual variation in absorption, distribution, metabolism, and excretion means that the same dose, given to two patients of identical weight and renal function, can produce plasma concentrations that differ by a factor of three.<br><br>
+      <em>The drug is the same. The bodies are not. And the body that metabolizes slowly is walking toward the toxic side of a window that has very little room on either side.</em>
+    </div>
+    <div class="div"></div>
+    <div class="lens-ar" lang="ar">المؤشر العلاجي هو الرقم الأكثر خطورة في الصيدلة. إنه النسبة بين الجرعة التي تساعد والجرعة التي تضر — ولبعض الأدوية، هذه النسبة صغيرة بشكل مرعب. الديجوكسين. الليثيوم. الأمينوغليكوزيدات. المؤشر العلاجي للديجوكسين: 0.5-2.0 نانوغرام/مل. السمية تبدأ عند 2.0. الخط بين العلاج والتسمم هو نقطة عشرية واحدة. الدواء هو نفسه. الأجساد ليست كذلك. والجسم الذي يتمثل ببطء يسير نحو الجانب السام لنافذة ليس فيها متسع على أي من الجانبين.</div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section class="fade">
+  <div class="sec-label">C — The Architect</div>
+  <h2 class="sec-title">Three acts.<br><em>The double-cross.</em></h2>
+  <div class="act-grid">
+    <div class="act-cell">
+      <div class="act-num">Act I — The Mission Brief</div>
+      <div class="act-title">Therapeutic Drug Monitoring</div>
+      <div class="act-scene">"The vancomycin was started at 3 AM — 25 mg/kg loading dose for the MRSA bacteremia. By 8 AM, the pre-dose trough was drawn. The infectious disease pharmacist reviewed the level: 22 mg/L. Slightly elevated — the target was 15-20. 'He's a slow metabolizer,' she said. 'Drop the dose.' The bacteria were being killed. The kidneys were watching."</div>
+      <div class="act-clinical">Vancomycin for MRSA bacteremia<br>Trough level: 22 mg/L (target 15–20)<br>CrCl: 55 mL/min · TDM-guided dose adjustment</div>
+    </div>
+    <div class="act-cell">
+      <div class="act-num">Act II — The Compromise</div>
+      <div class="act-title">The Interaction Detected</div>
+      <div class="act-scene">"On day 3, a new drug was added: IV piperacillin-tazobactam for broad coverage. By day 5, the creatinine had risen from 85 to 140 μmol/L. The vancomycin trough was now 28. The nephrology team was consulted. 'The pip-tazo is augmenting the nephrotoxicity,' they said. 'This is the most common drug interaction in the ICU that no one talks about until the kidneys fail.'"</div>
+      <div class="act-clinical">Added: pip-tazo day 3 · Creatinine 85 → 140 μmol/L<br>Vancomycin trough: 22 → 28 mg/L<br>AKI: stage 1 · Piperacillin-tazobactam discontinued</div>
+    </div>
+    <div class="act-cell">
+      <div class="act-num">Act III — The Recovery</div>
+      <div class="act-title">Mission Completed</div>
+      <div class="act-scene">"Piperacillin-tazobactam was stopped. Vancomycin dose was reduced. By day 7, creatinine had returned to 92. By day 10, the blood cultures were negative. The MRSA bacteremia had been cleared. 'The drug won,' the ID physician said. 'With significant collateral damage to the kidneys, which fortunately recovered. It always costs something.'"</div>
+      <div class="act-clinical">Blood cultures negative day 10 · MRSA cleared<br>Creatinine normalized · Vancomycin discontinued<br>Total course: 14 days · PICC line removed</div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section class="fade">
+  <div class="sec-label">D — The Ghost Doctor</div>
+  <h2 class="sec-title">CLINICALLINC<br><em>checks every interaction.</em></h2>
+  <div class="ghost-block">
+    <div class="ghost-header">👻 CLINICALLINC · Pharmacology Accuracy Specifications</div>
+    <div class="ghost-row"><span class="ghost-check">✓</span><span class="ghost-text"><strong>Locked fact:</strong> CYP450 enzyme systems and their major substrates, inhibitors, and inducers are clinically accurate in all prose. Fluconazole inhibits CYP2C9 and CYP3A4. Rifampicin induces CYP3A4, 2C9, 2C19. These interactions are never invented for narrative effect.</span></div>
+    <div class="ghost-row"><span class="ghost-check">✓</span><span class="ghost-text"><strong>Locked fact:</strong> Therapeutic drug monitoring targets: Vancomycin AUC/MIC 400–600 (current guidance) or trough 10–20 mg/L (older guidance); Lithium 0.6–1.0 mmol/L; Digoxin 0.5–2.0 ng/mL; Phenytoin 10–20 mg/L.</span></div>
+    <div class="ghost-row"><span class="ghost-check">✓</span><span class="ghost-text"><strong>Locked fact:</strong> The piperacillin-tazobactam + vancomycin nephrotoxicity interaction is real and documented. The prose never invents drug interactions — it uses only evidence-based interactions from current literature.</span></div>
+    <div class="ghost-row"><span class="ghost-check">✓</span><span class="ghost-text"><strong>Locked fact:</strong> First-pass metabolism affects bioavailability of oral drugs that are extensively extracted by the liver. IV administration bypasses first-pass. The prose never conflates oral and IV bioavailability without acknowledging the route difference.</span></div>
+    <div class="ghost-row"><span class="ghost-check">✓</span><span class="ghost-text"><strong>Locked fact:</strong> Receptor pharmacology — agonists, partial agonists, antagonists, inverse agonists — is mechanistically accurate. The "lock and key" metaphor is used only as an entry point, not as a final explanation of receptor dynamics.</span></div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section class="fade">
+  <div class="sec-label">E — The Interface</div>
+  <h2 class="sec-title">The Alchemy<br><em>Studio.</em></h2>
+  <div class="iface-grid">
+    <div class="iface-card"><div class="iface-icon">🕵️</div><div class="iface-title">Drug Dossier Generator</div><div class="iface-desc">Every drug gets a classified dossier: <em>cover identity</em> (generic/brand name), <em>mission objective</em> (mechanism of action), <em>known handlers</em> (receptors/enzymes), <em>known vulnerabilities</em> (interactions/contraindications), <em>exit strategy</em> (metabolism/excretion).</div></div>
+    <div class="iface-card"><div class="iface-icon">📈</div><div class="iface-title">PK/PD Curve Narrator</div><div class="iface-desc">A plasma concentration-time curve becomes a <em>thriller arc</em>: peak as the moment of maximum effect, half-life as the countdown, trough as the vulnerable interval. The pharmacokinetics mapped to narrative tension.</div></div>
+    <div class="iface-card"><div class="iface-icon">⚠️</div><div class="iface-title">Interaction Thriller Engine</div><div class="iface-desc">Input two drugs and receive: the interaction mechanism, the clinical consequence, and <em>the narrative of what happens to the patient</em> if the interaction is missed — told as an espionage story where the second drug is the double agent.</div></div>
+    <div class="iface-card"><div class="iface-icon">💉</div><div class="iface-title">Adverse Effect Biography</div><div class="iface-desc">Each adverse effect is a character study: why this drug does this to this system, what the biological narrative is behind the clinical observation, and what the patient experiences — <em>translated from mechanism to lived experience</em>.</div></div>
+    <div class="iface-card"><div class="iface-icon">🧪</div><div class="iface-title">Clinical Trial Story Arc</div><div class="iface-desc">The journey from molecule to medication — Phase I through Phase IV — told as a <em>development thriller</em>: the promising lead compound, the toxicity that kills it, the reformulation, the pivotal trial, the FDA submission, the approval, the post-marketing surprise.</div></div>
+    <div class="iface-card"><div class="iface-icon">🌐</div><div class="iface-title">Arabic Pharmacology Register</div><div class="iface-desc">Arabic pharmacology prose draws from the tradition of Arabic medieval pharmacy — <em>Ibn Sina's Canon of Medicine, al-Kindi's classification of drugs</em> — to create a historical and literary register that honors the Arabic tradition in pharmaceutical science.</div></div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section class="fade">
+  <div class="sec-label">F — The Metrics</div>
+  <h2 class="sec-title">What success<br><em>looks like.</em></h2>
+  <div class="metrics-row">
+    <div class="metric"><div class="metric-n">5×</div><div class="metric-l">Half-lives to<br>97% drug clearance</div></div>
+    <div class="metric"><div class="metric-n">2.0</div><div class="metric-l">ng/mL — the digoxin<br>line between help and harm</div></div>
+    <div class="metric"><div class="metric-n">450</div><div class="metric-l">CYP enzymes in<br>the metabolic narrative</div></div>
+    <div class="metric"><div class="metric-n">2</div><div class="metric-l">Languages · Literary<br>quality in both</div></div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section class="fade">
+  <div class="sec-label">G — The Library</div>
+  <h2 class="sec-title">Three novels.<br><em>The operative's files.</em></h2>
+  <div class="lib-grid">
+    <div class="novel-card">
+      <div class="novel-n">01</div>
+      <div>
+        <div class="novel-en">The Half-Life of Everything</div>
+        <div class="novel-ar" lang="ar">نصف عمر كل شيء</div>
+        <div class="novel-p">A novel narrated by a single molecule of warfarin — from its synthesis in a pharmaceutical plant, through its packaging, through the pharmacist's dispensing, through the patient's swallowing, through first-pass metabolism, into plasma, to the receptor, through the CYP2C9 encounter that metabolizes it, to its excretion. A molecule's entire existence in one human body, told in real time.</div>
+        <div class="novel-tags"><span class="novel-tag">Warfarin</span><span class="novel-tag">First-Person Molecule</span><span class="novel-tag">Temp 0.85</span><span class="novel-tag">EN+AR</span></div>
+      </div>
+    </div>
+    <div class="novel-card">
+      <div class="novel-n">02</div>
+      <div>
+        <div class="novel-en">Double Agent</div>
+        <div class="novel-ar" lang="ar">العميل المزدوج</div>
+        <div class="novel-p">A fluconazole molecule is deployed to treat a fungal infection — and inadvertently becomes an agent of warfarin toxicity. Told from both perspectives simultaneously: the fluconazole molecule successfully completing its antifungal mission, and the warfarin molecule, unable to be metabolized, accumulating to dangerous concentrations. Two drugs, two missions, one disaster — and the patient caught between them.</div>
+        <div class="novel-tags"><span class="novel-tag">Drug Interaction</span><span class="novel-tag">CYP450</span><span class="novel-tag">Dual Narrative</span><span class="novel-tag">Temp 0.80</span></div>
+      </div>
+    </div>
+    <div class="novel-card">
+      <div class="novel-n">03</div>
+      <div>
+        <div class="novel-en">Seventeen Years to Market</div>
+        <div class="novel-ar" lang="ar">سبعة عشر عاماً حتى السوق</div>
+        <div class="novel-p">The biography of a drug from first synthesis to regulatory approval — seventeen years, three abandoned lead compounds, one near-fatal Phase I toxicity, the pivotal Phase III trial that barely succeeded, the FDA advisory committee meeting, the approval letter. Told from the perspective of the chemist who first synthesized it and spent seventeen years never knowing if it would ever reach a patient.</div>
+        <div class="novel-tags"><span class="novel-tag">Drug Development</span><span class="novel-tag">Clinical Trials</span><span class="novel-tag">Temp 0.70</span><span class="novel-tag">EN+AR</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="vol-nav fade">
+  <a href="vol08.html">← Vol. 08 — VeinForge</a>
+  <a class="center" href="index.html">PulseForge Series</a>
+  <a href="vol10.html">Vol. 10 — BirthForge →</a>
+</div>
+</div>
+
+</main>
+<footer role="contentinfo">
+  <div class="footer-brand">Dose<em>Forge</em></div>
+  <div class="footer-meta">Vol. 09 · Pharmacology<br>BrainSAIT × Cinematic Medical Novelist Engine v1.0<br>© 2025 BrainSAIT · All rights reserved</div>
+</footer>
+<script>
+const obs = new IntersectionObserver(entries => { entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('on'); }); }, { threshold:0.06 });
+document.querySelectorAll('.fade').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BirthForge — Vol. 10 · Obstetrics & Pediatrics · BrainSAIT</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;700&family=JetBrains+Mono:wght@300;400;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --midnight: #0a0f1e;
+        --deep-navy: #0d1529;
+        --signal-teal: #00c9b8;
+        --ecg-green: #00ff88;
+        --cream: #f5f0e8;
+        --gold: #c9a84c;
+        --accent: #ec4899;
+        --glass: rgba(255, 255, 255, 0.03);
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background: var(--midnight);
+        color: var(--cream);
+        font-family: "Cormorant Garamond", serif;
+        overflow-x: hidden;
+      }
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='512' height='512' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+        opacity: 0.3;
+        pointer-events: none;
+      }
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: rgba(10, 15, 30, 0.95);
+        backdrop-filter: blur(16px);
+        border-bottom: 1px solid rgba(245, 240, 232, 0.07);
+        padding: 16px 40px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .header-logo {
+        font-family: "Playfair Display", serif;
+        font-size: 20px;
+        font-weight: 900;
+      }
+      .header-logo em {
+        color: var(--accent);
+        font-style: italic;
+      }
+      .header-nav {
+        display: flex;
+        gap: 24px;
+      }
+      .header-nav a {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 9px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: rgba(245, 240, 232, 0.35);
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+      .header-nav a:hover {
+        color: var(--accent);
+      }
+      .header-tag {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 10px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--accent);
+        opacity: 0.8;
+      }
+      .hero {
+        text-align: center;
+        padding: 100px 24px 80px;
+        position: relative;
+        z-index: 10;
+        background: radial-gradient(
+          ellipse 70% 50% at 50% 20%,
+          rgba(236, 72, 153, 0.1) 0%,
+          transparent 70%
+        );
+      }
+      .hero-vol {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 9px;
+        letter-spacing: 5px;
+        text-transform: uppercase;
+        color: rgba(245, 240, 232, 0.25);
+        margin-bottom: 16px;
+      }
+      .hero-kicker {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 10px;
+        letter-spacing: 5px;
+        text-transform: uppercase;
+        color: var(--signal-teal);
+        margin-bottom: 20px;
+      }
+      .hero-emoji {
+        font-size: 72px;
+        margin-bottom: 24px;
+        display: block;
+        animation: born 3s ease-in-out infinite;
+      }
+      @keyframes born {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.1);
+        }
+      }
+      .hero-title {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(52px, 8vw, 96px);
+        font-weight: 900;
+        line-height: 0.92;
+        letter-spacing: -3px;
+        margin-bottom: 16px;
+      }
+      .hero-title em {
+        color: var(--accent);
+        font-style: italic;
+      }
+      .hero-sub {
+        font-size: 20px;
+        font-weight: 300;
+        font-style: italic;
+        color: rgba(245, 240, 232, 0.5);
+        margin-bottom: 8px;
+      }
+      .hero-sub-ar {
+        font-family: "IBM Plex Sans Arabic", sans-serif;
+        font-size: 16px;
+        direction: rtl;
+        color: rgba(245, 240, 232, 0.3);
+        margin-bottom: 40px;
+      }
+      .hero-tagline {
+        font-family: "Playfair Display", serif;
+        font-size: 22px;
+        font-style: italic;
+        color: rgba(245, 240, 232, 0.65);
+        max-width: 640px;
+        margin: 0 auto 48px;
+        line-height: 1.5;
+      }
+      .hero-tagline-ar {
+        font-family: "IBM Plex Sans Arabic", sans-serif;
+        font-size: 16px;
+        direction: rtl;
+        color: rgba(245, 240, 232, 0.35);
+        max-width: 640px;
+        margin: 0 auto 60px;
+        line-height: 1.9;
+      }
+      .waveform-wrap {
+        width: 100%;
+        max-width: 900px;
+        margin: 0 auto 60px;
+        height: 60px;
+      }
+      .waveform-svg {
+        width: 100%;
+        height: 100%;
+      }
+      .waveform-line {
+        stroke: var(--accent);
+        stroke-width: 1.8;
+        fill: none;
+        stroke-dasharray: 1400;
+        stroke-dashoffset: 1400;
+        animation: draw 3s ease forwards;
+      }
+      @keyframes draw {
+        to {
+          stroke-dashoffset: 0;
+        }
+      }
+      .badge-row {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-bottom: 60px;
+      }
+      .badge {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 9px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        padding: 6px 14px;
+        border: 1px solid rgba(236, 72, 153, 0.3);
+        color: rgba(236, 72, 153, 0.7);
+      }
+      .page {
+        position: relative;
+        z-index: 10;
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 80px 32px;
+      }
+      .sec-label {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 10px;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        color: var(--signal-teal);
+        margin-bottom: 14px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .sec-label::before {
+        content: "";
+        width: 32px;
+        height: 1px;
+        background: var(--signal-teal);
+        opacity: 0.6;
+      }
+      .sec-title {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(28px, 4vw, 50px);
+        font-weight: 700;
+        line-height: 1.05;
+        letter-spacing: -1px;
+        margin-bottom: 20px;
+      }
+      .sec-title em {
+        color: var(--gold);
+        font-style: italic;
+      }
+      .sec-body {
+        font-size: 16px;
+        line-height: 1.85;
+        color: rgba(245, 240, 232, 0.55);
+        font-weight: 300;
+        margin-bottom: 48px;
+        max-width: 800px;
+      }
+      .rule {
+        border: none;
+        border-top: 1px solid rgba(245, 240, 232, 0.07);
+        margin: 80px 0;
+      }
+      .vision-block {
+        background: var(--glass);
+        border: 1px solid rgba(236, 72, 153, 0.15);
+        border-left: 3px solid var(--accent);
+        padding: 44px 48px;
+        margin-top: 40px;
+      }
+      .vision-block p {
+        font-size: 18px;
+        line-height: 1.95;
+        color: rgba(245, 240, 232, 0.75);
+        font-weight: 300;
+        margin-bottom: 24px;
+      }
+      .vision-block p:last-child {
+        margin-bottom: 0;
+      }
+      .vision-block strong {
+        color: var(--gold);
+        font-weight: 600;
+      }
+      .vision-ar {
+        background: var(--glass);
+        border: 1px solid rgba(201, 168, 76, 0.12);
+        border-right: 3px solid var(--gold);
+        padding: 36px 44px;
+        margin-top: 16px;
+        direction: rtl;
+      }
+      .vision-ar p {
+        font-family: "IBM Plex Sans Arabic", sans-serif;
+        font-size: 16px;
+        line-height: 2.1;
+        color: rgba(245, 240, 232, 0.6);
+        margin-bottom: 20px;
+      }
+      .vision-ar p:last-child {
+        margin-bottom: 0;
+      }
+      .lens-card {
+        background: #060a12;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        padding: 44px 48px;
+        margin-top: 32px;
+        position: relative;
+        overflow: hidden;
+      }
+      .lens-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+      }
+      .l1::before {
+        background: linear-gradient(to right, var(--accent), transparent);
+      }
+      .l2::before {
+        background: linear-gradient(to right, var(--signal-teal), transparent);
+      }
+      .l3::before {
+        background: linear-gradient(to right, var(--gold), transparent);
+      }
+      .lens-label {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 9px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+      }
+      .l1 .lens-label {
+        color: var(--accent);
+      }
+      .l2 .lens-label {
+        color: var(--signal-teal);
+      }
+      .l3 .lens-label {
+        color: var(--gold);
+      }
+      .lens-fact {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 12px;
+        color: rgba(245, 240, 232, 0.3);
+        margin-bottom: 24px;
+        padding: 12px 16px;
+        background: rgba(0, 0, 0, 0.3);
+        border-left: 2px solid rgba(255, 255, 255, 0.08);
+      }
+      .lens-en {
+        font-size: 19px;
+        line-height: 2;
+        color: rgba(245, 240, 232, 0.88);
+        font-weight: 300;
+        margin-bottom: 28px;
+        font-style: italic;
+      }
+      .lens-en strong {
+        color: var(--cream);
+        font-weight: 600;
+        font-style: normal;
+      }
+      .div {
+        width: 60px;
+        height: 1px;
+        background: rgba(245, 240, 232, 0.1);
+        margin: 28px 0;
+      }
+      .lens-ar {
+        font-family: "IBM Plex Sans Arabic", sans-serif;
+        font-size: 16px;
+        line-height: 2.2;
+        color: rgba(245, 240, 232, 0.55);
+        direction: rtl;
+      }
+      .act-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1px;
+        background: rgba(245, 240, 232, 0.07);
+        margin-top: 40px;
+      }
+      .act-cell {
+        background: var(--deep-navy);
+        padding: 36px 28px;
+      }
+      .act-num {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 9px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: rgba(245, 240, 232, 0.2);
+        margin-bottom: 12px;
+      }
+      .act-title {
+        font-family: "Playfair Display", serif;
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--accent);
+        margin-bottom: 16px;
+      }
+      .act-scene {
+        font-size: 15px;
+        line-height: 1.8;
+        color: rgba(245, 240, 232, 0.65);
+        margin-bottom: 14px;
+        font-style: italic;
+      }
+      .act-clinical {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        color: rgba(245, 240, 232, 0.3);
+        line-height: 1.7;
+      }
+      .ghost-block {
+        background: #020509;
+        border: 1px solid rgba(0, 255, 136, 0.12);
+        border-left: 3px solid var(--ecg-green);
+        padding: 40px 44px;
+        margin-top: 40px;
+      }
+      .ghost-header {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 10px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--ecg-green);
+        margin-bottom: 24px;
+      }
+      .ghost-row {
+        display: flex;
+        gap: 16px;
+        margin-bottom: 16px;
+        align-items: flex-start;
+      }
+      .ghost-check {
+        color: var(--ecg-green);
+        font-family: "JetBrains Mono", monospace;
+        font-size: 12px;
+        flex-shrink: 0;
+      }
+      .ghost-text {
+        font-size: 15px;
+        line-height: 1.75;
+        color: rgba(245, 240, 232, 0.6);
+      }
+      .ghost-text strong {
+        color: var(--cream);
+        font-weight: 600;
+      }
+      .iface-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+        margin-top: 40px;
+      }
+      .iface-card {
+        background: var(--glass);
+        border: 1px solid rgba(245, 240, 232, 0.07);
+        padding: 32px 28px;
+      }
+      .iface-icon {
+        font-size: 28px;
+        margin-bottom: 16px;
+      }
+      .iface-title {
+        font-family: "Playfair Display", serif;
+        font-size: 17px;
+        font-weight: 700;
+        margin-bottom: 10px;
+      }
+      .iface-desc {
+        font-size: 14px;
+        line-height: 1.75;
+        color: rgba(245, 240, 232, 0.5);
+      }
+      .iface-desc em {
+        color: var(--signal-teal);
+        font-style: normal;
+      }
+      .metrics-row {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1px;
+        background: rgba(245, 240, 232, 0.06);
+        border: 1px solid rgba(245, 240, 232, 0.06);
+        margin-top: 40px;
+      }
+      .metric {
+        background: var(--deep-navy);
+        padding: 36px 24px;
+        text-align: center;
+      }
+      .metric-n {
+        font-family: "Playfair Display", serif;
+        font-size: 44px;
+        font-weight: 900;
+        line-height: 1;
+        background: linear-gradient(135deg, var(--gold), var(--accent));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 10px;
+      }
+      .metric-l {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 9px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: rgba(245, 240, 232, 0.35);
+        line-height: 1.6;
+      }
+      .lib-grid {
+        display: grid;
+        gap: 20px;
+        margin-top: 40px;
+      }
+      .novel-card {
+        background: var(--glass);
+        border: 1px solid rgba(245, 240, 232, 0.08);
+        padding: 36px 40px;
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 0 32px;
+        align-items: start;
+      }
+      .novel-n {
+        font-family: "Playfair Display", serif;
+        font-size: 48px;
+        font-weight: 900;
+        color: rgba(236, 72, 153, 0.2);
+        line-height: 1;
+      }
+      .novel-en {
+        font-family: "Playfair Display", serif;
+        font-size: 22px;
+        font-weight: 700;
+        font-style: italic;
+        margin-bottom: 6px;
+      }
+      .novel-ar {
+        font-family: "IBM Plex Sans Arabic", sans-serif;
+        font-size: 15px;
+        direction: rtl;
+        color: rgba(245, 240, 232, 0.4);
+        margin-bottom: 14px;
+      }
+      .novel-p {
+        font-size: 14px;
+        line-height: 1.75;
+        color: rgba(245, 240, 232, 0.5);
+        font-style: italic;
+      }
+      .novel-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 16px;
+      }
+      .novel-tag {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 9px;
+        letter-spacing: 1px;
+        padding: 3px 10px;
+        border: 1px solid rgba(245, 240, 232, 0.1);
+        color: rgba(245, 240, 232, 0.35);
+      }
+      .vol-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 32px 0;
+        border-top: 1px solid rgba(245, 240, 232, 0.07);
+        margin-top: 80px;
+      }
+      .vol-nav a {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 10px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: rgba(245, 240, 232, 0.35);
+        transition: color 0.2s;
+      }
+      .vol-nav a:hover,
+      .vol-nav .center {
+        color: var(--signal-teal);
+      }
+      footer {
+        border-top: 1px solid rgba(245, 240, 232, 0.07);
+        padding: 60px 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 24px;
+        position: relative;
+        z-index: 10;
+      }
+      .footer-brand {
+        font-family: "Playfair Display", serif;
+        font-size: 28px;
+        font-weight: 900;
+      }
+      .footer-brand em {
+        color: var(--accent);
+        font-style: italic;
+      }
+      .footer-meta {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 9px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: rgba(245, 240, 232, 0.2);
+        text-align: right;
+        line-height: 1.9;
+      }
+      .fade {
+        opacity: 0;
+        transform: translateY(24px);
+        transition:
+          opacity 0.7s ease,
+          transform 0.7s ease;
+      }
+      .fade.on {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      @media (max-width: 800px) {
+        .act-grid {
+          grid-template-columns: 1fr;
+        }
+        .iface-grid {
+          grid-template-columns: 1fr;
+        }
+        .metrics-row {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .novel-card {
+          grid-template-columns: 1fr;
+        }
+      }

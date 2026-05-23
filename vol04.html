@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CellForge — Vol. 04 · Oncology · BrainSAIT</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel=\"stylesheet\" href=\"assets/styles.min.css\">
+    <link rel="stylesheet" href="assets/styles.css">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;700&family=JetBrains+Mono:wght@300;400;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root { --midnight:#0a0f1e; --deep-navy:#0d1529; --signal-teal:#00c9b8; --ecg-green:#00ff88; --cream:#f5f0e8; --gold:#c9a84c; --accent:#d97706; --glass:rgba(255,255,255,0.03); }
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { background:var(--midnight); color:var(--cream); font-family:'Cormorant Garamond',serif; overflow-x:hidden; }
+body::before { content:''; position:fixed; inset:0; z-index:0; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='512' height='512' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E"); opacity:0.3; pointer-events:none; }
+.site-header { position:sticky; top:0; z-index:100; background:rgba(10,15,30,0.95); backdrop-filter:blur(16px); border-bottom:1px solid rgba(245,240,232,0.07); padding:16px 40px; display:flex; align-items:center; justify-content:space-between; }
+.header-logo { font-family:'Playfair Display',serif; font-size:20px; font-weight:900; }
+.header-logo em { color:var(--accent); font-style:italic; }
+.header-nav { display:flex; gap:24px; }
+.header-nav a { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:rgba(245,240,232,0.35); text-decoration:none; transition:color 0.2s; }
+.header-nav a:hover { color:var(--accent); }
+.header-tag { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--accent); opacity:0.8; }
+.hero { text-align:center; padding:100px 24px 80px; position:relative; z-index:10; background:radial-gradient(ellipse 70% 50% at 50% 20%, rgba(217,119,6,0.10) 0%, transparent 70%); }
+.hero-vol { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:5px; text-transform:uppercase; color:rgba(245,240,232,0.25); margin-bottom:16px; }
+.hero-kicker { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:5px; text-transform:uppercase; color:var(--signal-teal); margin-bottom:20px; }
+.hero-emoji { font-size:72px; margin-bottom:24px; display:block; animation:divide 3s ease-in-out infinite; }
+@keyframes divide { 0%,100%{transform:scale(1) rotate(0deg)} 50%{transform:scale(1.05) rotate(2deg)} }
+.hero-title { font-family:'Playfair Display',serif; font-size:clamp(52px,8vw,96px); font-weight:900; line-height:0.92; letter-spacing:-3px; margin-bottom:16px; }
+.hero-title em { color:var(--accent); font-style:italic; }
+.hero-sub { font-size:20px; font-weight:300; font-style:italic; color:rgba(245,240,232,0.5); margin-bottom:8px; }
+.hero-sub-ar { font-family:'IBM Plex Sans Arabic',sans-serif; font-size:16px; direction:rtl; color:rgba(245,240,232,0.3); margin-bottom:40px; }
+.hero-tagline { font-family:'Playfair Display',serif; font-size:22px; font-style:italic; color:rgba(245,240,232,0.65); max-width:640px; margin:0 auto 48px; line-height:1.5; }
+.hero-tagline-ar { font-family:'IBM Plex Sans Arabic',sans-serif; font-size:16px; direction:rtl; color:rgba(245,240,232,0.35); max-width:640px; margin:0 auto 60px; line-height:1.9; }
+.waveform-wrap { width:100%; max-width:900px; margin:0 auto 60px; height:60px; }
+.waveform-svg { width:100%; height:100%; }
+.waveform-line { stroke:var(--accent); stroke-width:1.8; fill:none; stroke-dasharray:1400; stroke-dashoffset:1400; animation:draw 3s ease forwards; }
+@keyframes draw { to { stroke-dashoffset:0; } }
+.badge-row { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-bottom:60px; }
+.badge { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; padding:6px 14px; border:1px solid rgba(217,119,6,0.3); color:rgba(217,119,6,0.7); }
+.page { position:relative; z-index:10; max-width:1100px; margin:0 auto; padding:80px 32px; }
+.sec-label { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:4px; text-transform:uppercase; color:var(--signal-teal); margin-bottom:14px; display:flex; align-items:center; gap:12px; }
+.sec-label::before { content:''; width:32px; height:1px; background:var(--signal-teal); opacity:0.6; }
+.sec-title { font-family:'Playfair Display',serif; font-size:clamp(28px,4vw,50px); font-weight:700; line-height:1.05; letter-spacing:-1px; margin-bottom:20px; }
+.sec-title em { color:var(--gold); font-style:italic; }
+.sec-body { font-size:16px; line-height:1.85; color:rgba(245,240,232,0.55); font-weight:300; margin-bottom:48px; max-width:800px; }
+.rule { border:none; border-top:1px solid rgba(245,240,232,0.07); margin:80px 0; }
+.vision-block { background:var(--glass); border:1px solid rgba(217,119,6,0.15); border-left:3px solid var(--accent); padding:44px 48px; margin-top:40px; }
+.vision-block p { font-size:18px; line-height:1.95; color:rgba(245,240,232,0.75); font-weight:300; margin-bottom:24px; }
+.vision-block p:last-child { margin-bottom:0; }
+.vision-block strong { color:var(--gold); font-weight:600; }
+.vision-ar { background:var(--glass); border:1px solid rgba(201,168,76,0.12); border-right:3px solid var(--gold); padding:36px 44px; margin-top:16px; direction:rtl; }
+.vision-ar p { font-family:'IBM Plex Sans Arabic',sans-serif; font-size:16px; line-height:2.1; color:rgba(245,240,232,0.6); margin-bottom:20px; }
+.vision-ar p:last-child { margin-bottom:0; }
+.lens-card { background:#060a12; border:1px solid rgba(255,255,255,0.06); padding:44px 48px; margin-top:32px; position:relative; overflow:hidden; }
+.lens-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; }
+.l1::before { background:linear-gradient(to right,var(--accent),transparent); }
+.l2::before { background:linear-gradient(to right,var(--signal-teal),transparent); }
+.l3::before { background:linear-gradient(to right,var(--gold),transparent); }
+.lens-label { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:3px; text-transform:uppercase; margin-bottom:8px; }
+.l1 .lens-label { color:var(--accent); } .l2 .lens-label { color:var(--signal-teal); } .l3 .lens-label { color:var(--gold); }
+.lens-fact { font-family:'JetBrains Mono',monospace; font-size:12px; color:rgba(245,240,232,0.3); margin-bottom:24px; padding:12px 16px; background:rgba(0,0,0,0.3); border-left:2px solid rgba(255,255,255,0.08); }
+.lens-en { font-size:19px; line-height:2; color:rgba(245,240,232,0.88); font-weight:300; margin-bottom:28px; font-style:italic; }
+.lens-en strong { color:var(--cream); font-weight:600; font-style:normal; }
+.div { width:60px; height:1px; background:rgba(245,240,232,0.1); margin:28px 0; }
+.lens-ar { font-family:'IBM Plex Sans Arabic',sans-serif; font-size:16px; line-height:2.2; color:rgba(245,240,232,0.55); direction:rtl; }
+.act-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:rgba(245,240,232,0.07); margin-top:40px; }
+.act-cell { background:var(--deep-navy); padding:36px 28px; }
+.act-num { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:rgba(245,240,232,0.2); margin-bottom:12px; }
+.act-title { font-family:'Playfair Display',serif; font-size:18px; font-weight:700; color:var(--accent); margin-bottom:16px; }
+.act-scene { font-size:15px; line-height:1.8; color:rgba(245,240,232,0.65); margin-bottom:14px; font-style:italic; }
+.act-clinical { font-family:'JetBrains Mono',monospace; font-size:11px; color:rgba(245,240,232,0.3); line-height:1.7; }
+.ghost-block { background:#020509; border:1px solid rgba(0,255,136,0.12); border-left:3px solid var(--ecg-green); padding:40px 44px; margin-top:40px; }
+.ghost-header { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--ecg-green); margin-bottom:24px; }
+.ghost-row { display:flex; gap:16px; margin-bottom:16px; align-items:flex-start; }
+.ghost-check { color:var(--ecg-green); font-family:'JetBrains Mono',monospace; font-size:12px; flex-shrink:0; }
+.ghost-text { font-size:15px; line-height:1.75; color:rgba(245,240,232,0.6); }
+.ghost-text strong { color:var(--cream); font-weight:600; }
+.iface-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:24px; margin-top:40px; }
+.iface-card { background:var(--glass); border:1px solid rgba(245,240,232,0.07); padding:32px 28px; }
+.iface-icon { font-size:28px; margin-bottom:16px; }
+.iface-title { font-family:'Playfair Display',serif; font-size:17px; font-weight:700; margin-bottom:10px; }
+.iface-desc { font-size:14px; line-height:1.75; color:rgba(245,240,232,0.5); }
+.iface-desc em { color:var(--signal-teal); font-style:normal; }
+.metrics-row { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:rgba(245,240,232,0.06); border:1px solid rgba(245,240,232,0.06); margin-top:40px; }
+.metric { background:var(--deep-navy); padding:36px 24px; text-align:center; }
+.metric-n { font-family:'Playfair Display',serif; font-size:44px; font-weight:900; line-height:1; background:linear-gradient(135deg,var(--gold),var(--accent)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:10px; }
+.metric-l { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:rgba(245,240,232,0.35); line-height:1.6; }
+.lib-grid { display:grid; gap:20px; margin-top:40px; }
+.novel-card { background:var(--glass); border:1px solid rgba(245,240,232,0.08); padding:36px 40px; display:grid; grid-template-columns:auto 1fr; gap:0 32px; align-items:start; }
+.novel-n { font-family:'Playfair Display',serif; font-size:48px; font-weight:900; color:rgba(217,119,6,0.2); line-height:1; }
+.novel-en { font-family:'Playfair Display',serif; font-size:22px; font-weight:700; font-style:italic; margin-bottom:6px; }
+.novel-ar { font-family:'IBM Plex Sans Arabic',sans-serif; font-size:15px; direction:rtl; color:rgba(245,240,232,0.4); margin-bottom:14px; }
+.novel-p { font-size:14px; line-height:1.75; color:rgba(245,240,232,0.5); font-style:italic; }
+.novel-tags { display:flex; flex-wrap:wrap; gap:8px; margin-top:16px; }
+.novel-tag { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:1px; padding:3px 10px; border:1px solid rgba(245,240,232,0.1); color:rgba(245,240,232,0.35); }
+.vol-nav { display:flex; justify-content:space-between; align-items:center; padding:32px 0; border-top:1px solid rgba(245,240,232,0.07); margin-top:80px; }
+.vol-nav a { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; text-decoration:none; color:rgba(245,240,232,0.35); transition:color 0.2s; }
+.vol-nav a:hover,.vol-nav .center { color:var(--signal-teal); }
+footer { border-top:1px solid rgba(245,240,232,0.07); padding:60px 40px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:24px; position:relative; z-index:10; }
+.footer-brand { font-family:'Playfair Display',serif; font-size:28px; font-weight:900; }
+.footer-brand em { color:var(--accent); font-style:italic; }
+.footer-meta { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:rgba(245,240,232,0.2); text-align:right; line-height:1.9; }
+.fade { opacity:0; transform:translateY(24px); transition:opacity 0.7s ease,transform 0.7s ease; }
+.fade.on { opacity:1; transform:translateY(0); }
+@media(max-width:800px){ .act-grid{grid-template-columns:1fr;} .iface-grid{grid-template-columns:1fr;} .metrics-row{grid-template-columns:repeat(2,1fr);} .novel-card{grid-template-columns:1fr;} }
+
+    .bilingual > .vision-block,.bilingual > .vision-ar{flex:1}    
+    @media(max-width:900px){.bilingual{flex-direction:column}}
+
+
+
+    <!-- CLINICALLINC-METADATA -->
+    <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "CreativeWork",
+  "name": "CellForge — Vol. 04 · Oncology · BrainSAIT",
+  "description": "Where pathology meets political fiction.",
+  "inLanguage": [
+    "en",
+    "ar"
+  ],
+  "isPartOf": {
+    "@type": "Series",
+    "name": "PulseForge Series"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "BrainSAIT",
+    "url": "https://brainsait.de"
+  },
+  "url": "https://brainsait.de/my-novel/vol04.html",
+  "sameAs": [
+    "https://brainsait.cloud/my-novel/vol04.html"
+  ],
+  "clincallinc": {
+    "version": "1.0",
+    "lockedFacts": [
+      "Locked fact: The 6 Hallmarks of Cancer (Hanahan & Weinberg 2000, updated 2022 to 14) are the structural backbone of all oncological prose. No cancer narrative invents hallmarks not present in the current literature.",
+      "Locked fact: KRAS mutation status directly affects anti-EGFR therapy eligibility (cetuximab/panitumumab contraindicated in KRAS mutant colorectal cancer). This is never dramatized as ambiguous.",
+      "Locked fact: TNM staging governs treatment decisions. Stage and management are never separated in any prose that implies clinical guidance.",
+      "Locked fact: \"Cure\" is not a term used in oncology for solid tumors without qualification. The prose uses \"no evidence of disease (NED),\" \"complete response,\" or \"long-term remission\" — never \"cured\" as a terminal clinical claim.",
+      "Locked fact: Chemotherapy resistance mechanisms (efflux pumps, DNA repair upregulation, target mutation, bypass signaling) are specified when resistance is narratively dramatized."
+    ]
+  }
+}
+    </script>
+    <link rel="canonical" href="https://brainsait.de/my-novel/vol04.html">
+    <link rel="alternate" hreflang="x-default" href="https://brainsait.cloud/my-novel/vol04.html">
+
+
+<body>
+<header role="banner" class="site-header">
+  <div class="header-logo">Cell<em>Forge</em></div>
+  <nav class="header-nav"><a href="vol03.html">← Vol. 03</a><a href="index.html">All Volumes</a><a href="vol05.html">Vol. 05 →</a></nav>
+  <div class="header-tag">Vol. 04 · Oncology</div>
+</header>
+<main role="main">
+
+<div class="hero fade">
+  <div class="hero-vol">PulseForge Series · Volume 04 of 12</div>
+  <div class="hero-kicker">Oncology · BrainSAIT Cinematic Medical Novelist Engine</div>
+  <span class="hero-emoji">🔬</span>
+  <h1 class="hero-title">Cell<em>Forge</em></h1>
+  <p class="hero-sub">Where pathology meets political fiction.</p>
+  <p class="hero-sub-ar" lang="ar">رواية الخلية المتمردة — حيث يلتقي علم الأمراض بالرواية السياسية</p>
+  <p class="hero-tagline">"Cancer is not a disease. It is a revolution without a manifesto — a population of cells that decided the rules no longer applied to them."</p>
+  <p class="hero-tagline-ar" lang="ar">السرطان ليس مرضاً. إنه ثورة بلا بيان — مجموعة من الخلايا قررت أن القواعد لم تعد تنطبق عليها.</p>
+  <div class="waveform-wrap">
+    <svg aria-hidden="true" focusable="false" class="waveform-svg" viewBox="0 0 900 60" preserveAspectRatio="none">
+      <polyline class="waveform-line" points="0,30 30,30 40,20 50,40 60,25 70,38 80,30 110,30 120,18 130,42 140,22 160,35 170,30 200,30 210,15 225,45 240,20 255,38 270,30 300,30 310,22 320,40 330,25 345,35 360,30 390,30 400,12 415,48 430,18 450,38 465,30 495,30 505,20 520,42 535,25 550,35 565,30 595,30 605,16 620,46 635,22 650,36 665,30 695,30 705,18 720,44 735,24 750,38 765,30 795,30 810,20 825,42 840,25 860,35 880,30 900,30"/>
+    </svg>
+  </div>
+  <div class="badge-row">
+    <span class="badge">Mutation Graph</span><span class="badge">Accent #d97706</span><span class="badge">Drama Temp 0.85</span><span class="badge">Political Thriller</span><span class="badge">Bilingual EN+AR</span>
+  </div>
+</div>
+
+<div class="page">
+
+<section class="fade">
+  <div class="sec-label">A — Product Vision</div>
+  <h2 class="sec-title">The cell<br><em>as revolutionary.</em></h2>
+  <div class="bilingual"><div class="vision-block">
+    <p><strong>CellForge</strong> is the cinematic medical novelist engine for oncology — a tool that transforms the molecular language of mutations, proto-oncogenes, tumor suppressor genes, and chemotherapy resistance into prose that reads like a political thriller in which the body is the state, and cancer is the insurrection.</p>
+    <p>Every cancer begins with a cell that breaks a rule. The rule against dividing without permission. The rule against ignoring apoptosis signals. The rule against invading neighboring territory. Cancer is the story of a cell that discovered it could rewrite the constitution of its own existence — and the immune system, the physician, the chemotherapy agent, all working to restore order to a body that has decided to experience its own civil war.</p>
+    <p><strong>CellForge does not describe tumors.</strong> It narrates insurrections. Every oncological fact — the hallmarks of cancer, the TNM staging system, the mechanism of EGFR inhibitors — is rendered as a chapter in a political drama where the stakes are the highest in biology: the survival of the organism itself.</p>
+  </div>
+  <div class="vision-ar" lang="ar">
+    <p>CellForge هو محرك الروائي الطبي السينمائي لعلم الأورام — يحوّل لغة الطفرات والجينات المسرطنة ومثبطات الورم إلى نثر يُقرأ كرواية سياسية يكون فيها الجسم هو الدولة، والسرطان هو الانتفاضة.</p>
+    <p>CellForge لا يصف الأورام. بل يروي الانتفاضات. كل حقيقة أورام — سمات السرطان، نظام التصنيف TNM، آلية مثبطات EGFR — تُقدَّم كفصل في دراما سياسية حيث الرهانات هي الأعلى في علم الأحياء.</p>
+  </div></div>
+</section>
+
+<hr class="rule">
+
+<section class="fade">
+  <div class="sec-label">B — Three-Lens Transmutation</div>
+  <h2 class="sec-title">The cell's<br><em>manifesto.</em></h2>
+
+  <div class="lens-card l1">
+    <div class="lens-label">Lens 1 — Dramatic · The Tumor Suppressor as Editor-in-Chief</div>
+    <div class="lens-fact">RAW FACT: The p53 tumor suppressor gene is mutated in approximately 50% of all human cancers. It acts as the "guardian of the genome" — detecting DNA damage and triggering repair or apoptosis.</div>
+    <div class="lens-en">
+      The p53 gene is the body's editor-in-chief. Every day, in every cell, the genome makes copying errors — thousands of them. The p53 protein reads each one, decides its severity, and issues instructions: repair this, tolerate that, and for this one — the dangerous one, the one that could become something terrible — <strong>delete the entire cell.</strong><br><br>
+      When p53 breaks, no one checks the manuscript. The typos accumulate. A mutation here, a deletion there, a translocation that no one catches because the editor is gone. The prose of the genome grows increasingly corrupt — not all at once, not dramatically, but incrementally, sentence by sentence, over years.<br><br>
+      And then one day the accumulated errors add up to something new. Something that no longer reads like the organism it came from. Something that has, in the absence of editorial oversight, written itself into an entirely different story. <em>The tumor is not a mistake. It is a manuscript that no one was watching.</em>
+    </div>
+    <div class="div"></div>
+    <div class="lens-ar" lang="ar">جين p53 هو رئيس تحرير الجسم. كل يوم، في كل خلية، يرتكب الجينوم أخطاء نسخ — الآلاف منها. حين ينكسر p53، لا أحد يراجع المخطوطة. الأخطاء تتراكم. طفرة هنا، حذف هناك، انتقال لا يلتقطه أحد لأن المحرر غائب. ثم يوماً ما تضيف الأخطاء المتراكمة شيئاً جديداً — شيئاً لا يشبه الكائن الذي جاء منه. الورم ليس خطأ. إنه مخطوطة لم يكن أحد يراقبها.</div>
+  </div>
+
+  <div class="lens-card l2">
+    <div class="lens-label">Lens 2 — Eventful · Angiogenesis as Infrastructure Coup</div>
+    <div class="lens-fact">RAW FACT: Tumors cannot grow beyond 1–2 mm without inducing angiogenesis — the formation of new blood vessels. Cancer cells secrete VEGF to hijack the body's vascular infrastructure and redirect it to serve the tumor's growth.</div>
+    <div class="lens-en">
+      At 2 millimeters, the tumor runs out of oxygen. Not enough diffusion. Not enough supply. For most cell populations, this is the end — the signal for apoptosis, the natural checkpoint that prevents uncontrolled growth. <strong>But a cancer cell that has already broken every other rule is not about to be stopped by oxygen debt.</strong><br><br>
+      It secretes VEGF — Vascular Endothelial Growth Factor. A chemical signal that the body's endothelial cells are designed to read as: build here, extend here, supply this region. The body's own construction machinery, hijacked. The vessels that were intended to serve muscle, serve gut, serve brain — redirected. New capillaries sprout toward the tumor like roads being built toward a new capital city that the government never authorized.<br><br>
+      The tumor does not fight for resources. It simply asks the body to provide them. And the body, not yet understanding that it is feeding its own enemy, complies.
+    </div>
+    <div class="div"></div>
+    <div class="lens-ar" lang="ar">عند 2 ملليمتر، ينفد أوكسجين الورم. لمعظم مجموعات الخلايا، هذه هي النهاية. لكن خلية السرطان التي كسرت كل قاعدة أخرى لن تتوقف أمام عجز الأوكسجين. تفرز VEGF — عامل نمو بطانة الأوعية. إشارة كيميائية تقرأها خلايا الجسم البطانية على أنها: ابنِ هنا، امتد هنا، زوِّد هذه المنطقة. الجسم يمتثل. وهو لا يعرف بعد أنه يطعم عدوه الخاص.</div>
+  </div>
+
+  <div class="lens-card l3">
+    <div class="lens-label">Lens 3 — Hook · Resistance as Evolution in Real Time</div>
+    <div class="lens-fact">RAW FACT: Chemotherapy resistance develops through clonal selection — the drug kills sensitive cells, but resistant subclones survive and proliferate. The treatment itself accelerates the evolution of a more dangerous tumor.</div>
+    <div class="lens-en">
+      Here is the terrible arithmetic of chemotherapy resistance: <strong>the drug works. Then it stops working. And what comes back is worse than what was there before.</strong><br><br>
+      The chemotherapy kills ninety-nine percent of the tumor cells. This is what success looks like in oncology: ninety-nine percent. But one percent remains — a population of cells that happened, by random mutation, to carry a resistance mechanism. They were always there, in the shadows of the tumor's genetic diversity, too small to matter when the sensitive cells were dominant. Now the sensitive cells are gone. The resistant ones inherit the entire tumor. They proliferate. They fill the space. They carry the resistance as an identity.<br><br>
+      The physician has just performed a natural selection experiment, at clinical speed, inside a human body. The drug was the pressure. The resistant clone was the variation that survived. <em>The next tumor that appears will be, by definition, the one that already defeated the treatment.</em>
+    </div>
+    <div class="div"></div>
+    <div class="lens-ar" lang="ar">إليك الحساب المرعب لمقاومة العلاج الكيميائي: الدواء يعمل. ثم يتوقف عن العمل. وما يعود أسوأ مما كان موجوداً من قبل. العلاج الكيميائي يقتل 99% من خلايا الورم. لكن 1% يبقى — مجموعة من الخلايا تحمل بالصدفة آلية مقاومة. الطبيب أجرى تجربة انتقاء طبيعي، بسرعة سريرية، داخل جسم بشري. الورم التالي الذي يظهر سيكون، بحكم التعريف، الورم الذي هزم العلاج بالفعل.</div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section class="fade">
+  <div class="sec-label">C — The Architect</div>
+  <h2 class="sec-title">Three acts.<br><em>The insurrection.</em></h2>
+  <div class="act-grid">
+    <div class="act-cell">
+      <div class="act-num">Act I — The Symptom</div>
+      <div class="act-title">The Weight He Didn't Lose</div>
+      <div class="act-scene">"He hadn't tried to lose weight. That was the thing. He was eating the same, moving the same. But the pants didn't fit anymore — too loose. He assumed stress. He assumed the business. He assumed everything except the possibility that somewhere in his colon, a population of cells had been conducting a quiet insurrection for four years."</div>
+      <div class="act-clinical">58-year-old male · 8 kg unintentional weight loss<br>Change in bowel habits · Fatigue<br>No screening colonoscopy in 10 years</div>
+    </div>
+    <div class="act-cell">
+      <div class="act-num">Act II — The Diagnosis</div>
+      <div class="act-title">The Pathology Report</div>
+      <div class="act-scene">"The colonoscopy found it at 22 cm — a mass, circumferential, that had already involved the mesorectal fascia. The pathology report came back in six days: moderately differentiated adenocarcinoma. KRAS mutated. The oncologist read it and thought: we have a negotiation to conduct, and we are not in the stronger position."</div>
+      <div class="act-clinical">Colorectal adenocarcinoma · T3 N2 M0<br>KRAS exon 2 mutation · MSS<br>CEA: 145 ng/mL (ref &lt;5)</div>
+    </div>
+    <div class="act-cell">
+      <div class="act-num">Act III — The Outcome</div>
+      <div class="act-title">The Negotiation</div>
+      <div class="act-scene">"Six cycles of FOLFOX. Then surgery — a low anterior resection, mesorectal excision complete. Then adjuvant chemotherapy. At month eighteen, the CT showed no evidence of disease. The oncologist used the phrase carefully: 'no evidence.' Not 'cured.' Not 'gone.' No evidence. The war had paused. They were watching the silence, waiting to see if it meant peace."</div>
+      <div class="act-clinical">FOLFOX × 6 cycles · Complete mesorectal excision<br>pCR near-complete response · NED at 18 months<br>Surveillance CT/CEA q3 months × 3 years</div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section class="fade">
+  <div class="sec-label">D — The Ghost Doctor</div>
+  <h2 class="sec-title">CLINICALLINC<br><em>guards the hallmarks.</em></h2>
+  <div class="ghost-block">
+    <div class="ghost-header">👻 CLINICALLINC · Oncology Accuracy Specifications</div>
+    <div class="ghost-row"><span class="ghost-check">✓</span><span class="ghost-text"><strong>Locked fact:</strong> The 6 Hallmarks of Cancer (Hanahan & Weinberg 2000, updated 2022 to 14) are the structural backbone of all oncological prose. No cancer narrative invents hallmarks not present in the current literature.</span></div>
+    <div class="ghost-row"><span class="ghost-check">✓</span><span class="ghost-text"><strong>Locked fact:</strong> KRAS mutation status directly affects anti-EGFR therapy eligibility (cetuximab/panitumumab contraindicated in KRAS mutant colorectal cancer). This is never dramatized as ambiguous.</span></div>
+    <div class="ghost-row"><span class="ghost-check">✓</span><span class="ghost-text"><strong>Locked fact:</strong> TNM staging governs treatment decisions. Stage and management are never separated in any prose that implies clinical guidance.</span></div>
+    <div class="ghost-row"><span class="ghost-check">✓</span><span class="ghost-text"><strong>Locked fact:</strong> "Cure" is not a term used in oncology for solid tumors without qualification. The prose uses "no evidence of disease (NED)," "complete response," or "long-term remission" — never "cured" as a terminal clinical claim.</span></div>
+    <div class="ghost-row"><span class="ghost-check">✓</span><span class="ghost-text"><strong>Locked fact:</strong> Chemotherapy resistance mechanisms (efflux pumps, DNA repair upregulation, target mutation, bypass signaling) are specified when resistance is narratively dramatized.</span></div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section class="fade">
+  <div class="sec-label">E — The Interface</div>
+  <h2 class="sec-title">The Alchemy<br><em>Studio.</em></h2>
+  <div class="iface-grid">
+    <div class="iface-card"><div class="iface-icon">🧬</div><div class="iface-title">Mutation Narrative Engine</div><div class="iface-desc">Input any driver mutation — <em>KRAS, BRCA1/2, TP53, EGFR, ALK, RET</em> — and the engine generates a character study of that mutation: what it does to the cell, how it changes the clinical story, what it means for treatment options.</div></div>
+    <div class="iface-card"><div class="iface-icon">⚖️</div><div class="iface-title">Hallmarks Chapter Builder</div><div class="iface-desc">The 14 hallmarks of cancer become 14 chapter seeds. <em>Sustaining proliferative signaling</em> as political propaganda. <em>Evading apoptosis</em> as civil rights suppression. <em>Enabling replicative immortality</em> as the coup that cannot be undone.</div></div>
+    <div class="iface-card"><div class="iface-icon">📊</div><div class="iface-title">TNM Story Arc Generator</div><div class="iface-desc">Stage I through Stage IV each generates a different narrative genre: Stage I as <em>origin story</em>, Stage II as <em>early thriller</em>, Stage III as <em>war novel</em>, Stage IV as <em>philosophical reckoning</em>. The staging is clinically accurate. The genre is cinematically appropriate.</div></div>
+    <div class="iface-card"><div class="iface-icon">🔬</div><div class="iface-title">Pathology Report Translator</div><div class="iface-desc">Paste any pathology report and the engine translates it into two outputs: a patient-facing narrative (what this means for your life) and a physician-facing literary analysis (what this means for the clinical arc of care).</div></div>
+    <div class="iface-card"><div class="iface-icon">💊</div><div class="iface-title">Chemotherapy Drama Engine</div><div class="iface-desc">Each chemotherapy agent becomes a character: <em>Cisplatin</em> as the brutal interrogator, <em>Pembrolizumab</em> as the diplomat who unmasks the spy, <em>Tamoxifen</em> as the long game played over decades. The mechanism is the narrative.</div></div>
+    <div class="iface-card"><div class="iface-icon">🌐</div><div class="iface-title">Arabic Cancer Literature</div><div class="iface-desc">Arabic oncology prose draws from the tradition of Arabic resistance literature — poetry of endurance, survival, and the body as a site of contested meaning. The cultural register honors the patient, not just the pathology.</div></div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section class="fade">
+  <div class="sec-label">F — The Metrics</div>
+  <h2 class="sec-title">What success<br><em>looks like.</em></h2>
+  <div class="metrics-row">
+    <div class="metric"><div class="metric-n">14</div><div class="metric-l">Hallmarks of Cancer<br>dramatized as chapters</div></div>
+    <div class="metric"><div class="metric-n">99%</div><div class="metric-l">Chemotherapy efficacy<br>that still leaves 1%</div></div>
+    <div class="metric"><div class="metric-n">50%</div><div class="metric-l">Of all cancers with<br>p53 mutation</div></div>
+    <div class="metric"><div class="metric-n">2</div><div class="metric-l">Languages · Literary<br>quality in both</div></div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section class="fade">
+  <div class="sec-label">G — The Library</div>
+  <h2 class="sec-title">Three novels.<br><em>The revolution documented.</em></h2>
+  <div class="lib-grid">
+    <div class="novel-card">
+      <div class="novel-n">01</div>
+      <div>
+        <div class="novel-en">The Guardian Is Gone</div>
+        <div class="novel-ar" lang="ar">الحارس غائب</div>
+        <div class="novel-p">A novel narrated by a p53 gene — from the moment it was correctly configured in a healthy cell, through the accumulating insults of environmental carcinogens, through the first mutation that broke its reading frame, through its silence as the cell it was meant to protect becomes something monstrous. A tragedy told by the last honest voice in the genome before it goes quiet.</div>
+        <div class="novel-tags"><span class="novel-tag">p53 · Tumor Suppressor</span><span class="novel-tag">First-Person Gene</span><span class="novel-tag">Temp 1.0</span><span class="novel-tag">EN+AR</span></div>
+      </div>
+    </div>
+    <div class="novel-card">
+      <div class="novel-n">02</div>
+      <div>
+        <div class="novel-en">Resistance: A War History</div>
+        <div class="novel-ar" lang="ar">المقاومة: تاريخ حرب</div>
+        <div class="novel-p">A breast cancer patient undergoes six cycles of AC-T chemotherapy. The novel alternates between two perspectives: the patient experiencing the treatment, and the single resistant cancer cell that survived the first cycle and is now rebuilding. A war novel in which both sides believe they are the protagonist, and only one can be right.</div>
+        <div class="novel-tags"><span class="novel-tag">Breast Cancer</span><span class="novel-tag">Chemotherapy Resistance</span><span class="novel-tag">Dual Narrative</span><span class="novel-tag">Temp 0.85</span></div>
+      </div>
+    </div>
+    <div class="novel-card">
+      <div class="novel-n">03</div>
+      <div>
+        <div class="novel-en">Immunotherapy: The Unmasking</div>
+        <div class="novel-ar" lang="ar">العلاج المناعي: كشف القناع</div>
+        <div class="novel-p">A lung cancer patient with PD-L1 overexpression receives pembrolizumab — and the novel follows the immune response as a spy thriller. The cancer cells had been hiding behind a PD-L1 disguise for years. The pembrolizumab is the intelligence agent that finally sees through it. The T cells are the strike team. The tumor is the cover that's been blown.</div>
+        <div class="novel-tags"><span class="novel-tag">NSCLC · Immunotherapy</span><span class="novel-tag">Spy Thriller</span><span class="novel-tag">Temp 0.80</span><span class="novel-tag">EN+AR</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="vol-nav fade">
+  <a href="vol03.html">← Vol. 03 — BreathForge</a>
+  <a class="center" href="index.html">PulseForge Series</a>
+  <a href="vol05.html">Vol. 05 — ShadowForge →</a>
+</div>
+</div>
+
+</main>
+<footer role="contentinfo">
+  <div class="footer-brand">Cell<em>Forge</em></div>
+  <div class="footer-meta">Vol. 04 · Oncology<br>BrainSAIT × Cinematic Medical Novelist Engine v1.0<br>© 2025 BrainSAIT · All rights reserved</div>
+</footer>
+<script>
+const obs = new IntersectionObserver(entries => { entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('on'); }); }, { threshold:0.06 });
+document.querySelectorAll('.fade').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

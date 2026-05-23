@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SynapseForge — Vol. 02 · Neurology · BrainSAIT</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel=\"stylesheet\" href=\"assets/styles.min.css\">
+    <link rel="stylesheet" href="assets/styles.css">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;700&family=JetBrains+Mono:wght@300;400;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root { --midnight:#0a0f1e; --deep-navy:#0d1529; --signal-teal:#00c9b8; --ecg-green:#00ff88; --cream:#f5f0e8; --gold:#c9a84c; --accent:#7c3aed; --glass:rgba(255,255,255,0.03); }
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { background:var(--midnight); color:var(--cream); font-family:'Cormorant Garamond',serif; overflow-x:hidden; }
+body::before { content:''; position:fixed; inset:0; z-index:0; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='512' height='512' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E"); opacity:0.3; pointer-events:none; }
+.site-header { position:sticky; top:0; z-index:100; background:rgba(10,15,30,0.95); backdrop-filter:blur(16px); border-bottom:1px solid rgba(245,240,232,0.07); padding:16px 40px; display:flex; align-items:center; justify-content:space-between; }
+.header-logo { font-family:'Playfair Display',serif; font-size:20px; font-weight:900; }
+.header-logo em { color:var(--accent); font-style:italic; }
+.header-nav { display:flex; gap:24px; }
+.header-nav a { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:rgba(245,240,232,0.35); text-decoration:none; transition:color 0.2s; }
+.header-nav a:hover { color:var(--accent); }
+.header-tag { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--accent); opacity:0.8; }
+.hero { text-align:center; padding:100px 24px 80px; position:relative; z-index:10; background:radial-gradient(ellipse 70% 50% at 50% 20%, rgba(124,58,237,0.12) 0%, transparent 70%); }
+.hero-vol { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:5px; text-transform:uppercase; color:rgba(245,240,232,0.25); margin-bottom:16px; }
+.hero-kicker { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:5px; text-transform:uppercase; color:var(--signal-teal); margin-bottom:20px; }
+.hero-emoji { font-size:72px; margin-bottom:24px; display:block; animation:flicker 3.5s ease-in-out infinite; }
+@keyframes flicker { 0%,100%{opacity:1} 48%{opacity:1} 50%{opacity:0.7} 52%{opacity:1} 85%{opacity:1} 87%{opacity:0.6} 89%{opacity:1} }
+.hero-title { font-family:'Playfair Display',serif; font-size:clamp(52px,8vw,96px); font-weight:900; line-height:0.92; letter-spacing:-3px; margin-bottom:16px; }
+.hero-title em { color:var(--accent); font-style:italic; }
+.hero-sub { font-size:20px; font-weight:300; font-style:italic; color:rgba(245,240,232,0.5); margin-bottom:8px; }
+.hero-sub-ar { font-family:'IBM Plex Sans Arabic',sans-serif; font-size:16px; direction:rtl; color:rgba(245,240,232,0.3); margin-bottom:40px; }
+.hero-tagline { font-family:'Playfair Display',serif; font-size:22px; font-style:italic; color:rgba(245,240,232,0.65); max-width:640px; margin:0 auto 48px; line-height:1.5; }
+.hero-tagline-ar { font-family:'IBM Plex Sans Arabic',sans-serif; font-size:16px; direction:rtl; color:rgba(245,240,232,0.35); max-width:640px; margin:0 auto 60px; line-height:1.9; }
+.waveform-wrap { width:100%; max-width:900px; margin:0 auto 60px; height:60px; }
+.waveform-svg { width:100%; height:100%; }
+.waveform-line { stroke:var(--accent); stroke-width:1.5; fill:none; stroke-dasharray:1400; stroke-dashoffset:1400; animation:draw 3.5s ease forwards; }
+@keyframes draw { to { stroke-dashoffset:0; } }
+.badge-row { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-bottom:60px; }
+.badge { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; padding:6px 14px; border:1px solid rgba(124,58,237,0.3); color:rgba(124,58,237,0.7); }
+.page { position:relative; z-index:10; max-width:1100px; margin:0 auto; padding:80px 32px; }
+.sec-label { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:4px; text-transform:uppercase; color:var(--signal-teal); margin-bottom:14px; display:flex; align-items:center; gap:12px; }
+.sec-label::before { content:''; width:32px; height:1px; background:var(--signal-teal); opacity:0.6; }
+.sec-title { font-family:'Playfair Display',serif; font-size:clamp(28px,4vw,50px); font-weight:700; line-height:1.05; letter-spacing:-1px; margin-bottom:20px; }
+.sec-title em { color:var(--gold); font-style:italic; }
+.sec-body { font-size:16px; line-height:1.85; color:rgba(245,240,232,0.55); font-weight:300; margin-bottom:48px; max-width:800px; }
+.rule { border:none; border-top:1px solid rgba(245,240,232,0.07); margin:80px 0; }
+.vision-block { background:var(--glass); border:1px solid rgba(124,58,237,0.15); border-left:3px solid var(--accent); padding:44px 48px; margin-top:40px; }
+.vision-block p { font-size:18px; line-height:1.95; color:rgba(245,240,232,0.75); font-weight:300; margin-bottom:24px; }
+.vision-block p:last-child { margin-bottom:0; }
+.vision-block strong { color:var(--gold); font-weight:600; }
+.vision-ar { background:var(--glass); border:1px solid rgba(201,168,76,0.12); border-right:3px solid var(--gold); padding:36px 44px; margin-top:16px; direction:rtl; }
+.vision-ar p { font-family:'IBM Plex Sans Arabic',sans-serif; font-size:16px; line-height:2.1; color:rgba(245,240,232,0.6); margin-bottom:20px; }
+.vision-ar p:last-child { margin-bottom:0; }
+.lens-card { background:#060a12; border:1px solid rgba(255,255,255,0.06); padding:44px 48px; margin-top:32px; position:relative; overflow:hidden; }
+.lens-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; }
+.l1::before { background:linear-gradient(to right,var(--accent),transparent); }
+.l2::before { background:linear-gradient(to right,var(--signal-teal),transparent); }
+.l3::before { background:linear-gradient(to right,var(--gold),transparent); }
+.lens-label { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:3px; text-transform:uppercase; margin-bottom:8px; }
+.l1 .lens-label { color:var(--accent); } .l2 .lens-label { color:var(--signal-teal); } .l3 .lens-label { color:var(--gold); }
+.lens-fact { font-family:'JetBrains Mono',monospace; font-size:12px; color:rgba(245,240,232,0.3); margin-bottom:24px; padding:12px 16px; background:rgba(0,0,0,0.3); border-left:2px solid rgba(255,255,255,0.08); }
+.lens-en { font-size:19px; line-height:2; color:rgba(245,240,232,0.88); font-weight:300; margin-bottom:28px; font-style:italic; }
+.lens-en strong { color:var(--cream); font-weight:600; font-style:normal; }
+.div { width:60px; height:1px; background:rgba(245,240,232,0.1); margin:28px 0; }
+.lens-ar { font-family:'IBM Plex Sans Arabic',sans-serif; font-size:16px; line-height:2.2; color:rgba(245,240,232,0.55); direction:rtl; }
+.act-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:rgba(245,240,232,0.07); margin-top:40px; }
+.act-cell { background:var(--deep-navy); padding:36px 28px; }
+.act-num { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:rgba(245,240,232,0.2); margin-bottom:12px; }
+.act-title { font-family:'Playfair Display',serif; font-size:18px; font-weight:700; color:var(--accent); margin-bottom:16px; }
+.act-scene { font-size:15px; line-height:1.8; color:rgba(245,240,232,0.65); margin-bottom:14px; font-style:italic; }
+.act-clinical { font-family:'JetBrains Mono',monospace; font-size:11px; color:rgba(245,240,232,0.3); line-height:1.7; }
+.ghost-block { background:#020509; border:1px solid rgba(0,255,136,0.12); border-left:3px solid var(--ecg-green); padding:40px 44px; margin-top:40px; }
+.ghost-header { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--ecg-green); margin-bottom:24px; }
+.ghost-row { display:flex; gap:16px; margin-bottom:16px; align-items:flex-start; }
+.ghost-check { color:var(--ecg-green); font-family:'JetBrains Mono',monospace; font-size:12px; flex-shrink:0; }
+.ghost-text { font-size:15px; line-height:1.75; color:rgba(245,240,232,0.6); }
+.ghost-text strong { color:var(--cream); font-weight:600; }
+.iface-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:24px; margin-top:40px; }
+.iface-card { background:var(--glass); border:1px solid rgba(245,240,232,0.07); padding:32px 28px; }
+.iface-icon { font-size:28px; margin-bottom:16px; }
+.iface-title { font-family:'Playfair Display',serif; font-size:17px; font-weight:700; margin-bottom:10px; }
+.iface-desc { font-size:14px; line-height:1.75; color:rgba(245,240,232,0.5); }
+.iface-desc em { color:var(--signal-teal); font-style:normal; }
+.metrics-row { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:rgba(245,240,232,0.06); border:1px solid rgba(245,240,232,0.06); margin-top:40px; }
+.metric { background:var(--deep-navy); padding:36px 24px; text-align:center; }
+.metric-n { font-family:'Playfair Display',serif; font-size:44px; font-weight:900; line-height:1; background:linear-gradient(135deg,var(--gold),var(--accent)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:10px; }
+.metric-l { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:rgba(245,240,232,0.35); line-height:1.6; }
+.lib-grid { display:grid; gap:20px; margin-top:40px; }
+.novel-card { background:var(--glass); border:1px solid rgba(245,240,232,0.08); padding:36px 40px; display:grid; grid-template-columns:auto 1fr; gap:0 32px; align-items:start; }
+.novel-n { font-family:'Playfair Display',serif; font-size:48px; font-weight:900; color:rgba(124,58,237,0.2); line-height:1; }
+.novel-en { font-family:'Playfair Display',serif; font-size:22px; font-weight:700; font-style:italic; margin-bottom:6px; }
+.novel-ar { font-family:'IBM Plex Sans Arabic',sans-serif; font-size:15px; direction:rtl; color:rgba(245,240,232,0.4); margin-bottom:14px; }
+.novel-p { font-size:14px; line-height:1.75; color:rgba(245,240,232,0.5); font-style:italic; }
+.novel-tags { display:flex; flex-wrap:wrap; gap:8px; margin-top:16px; }
+.novel-tag { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:1px; padding:3px 10px; border:1px solid rgba(245,240,232,0.1); color:rgba(245,240,232,0.35); }
+.vol-nav { display:flex; justify-content:space-between; align-items:center; padding:32px 0; border-top:1px solid rgba(245,240,232,0.07); margin-top:80px; }
+.vol-nav a { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; text-decoration:none; color:rgba(245,240,232,0.35); transition:color 0.2s; }
+.vol-nav a:hover,.vol-nav .center { color:var(--signal-teal); }
+footer { border-top:1px solid rgba(245,240,232,0.07); padding:60px 40px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:24px; position:relative; z-index:10; }
+.footer-brand { font-family:'Playfair Display',serif; font-size:28px; font-weight:900; }
+.footer-brand em { color:var(--accent); font-style:italic; }
+.footer-meta { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:rgba(245,240,232,0.2); text-align:right; line-height:1.9; }
+.fade { opacity:0; transform:translateY(24px); transition:opacity 0.7s ease,transform 0.7s ease; }
+.fade.on { opacity:1; transform:translateY(0); }
+@media(max-width:800px){ .act-grid{grid-template-columns:1fr;} .iface-grid{grid-template-columns:1fr;} .metrics-row{grid-template-columns:repeat(2,1fr);} .novel-card{grid-template-columns:1fr;} }
+
+    .bilingual > .vision-block,.bilingual > .vision-ar{flex:1}    
+    @media(max-width:900px){.bilingual{flex-direction:column}}
+
+
+
+    <!-- CLINICALLINC-METADATA -->
+    <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "CreativeWork",
+  "name": "SynapseForge — Vol. 02 · Neurology · BrainSAIT",
+  "description": "Where neurons meet narratives.",
+  "inLanguage": [
+    "en",
+    "ar"
+  ],
+  "isPartOf": {
+    "@type": "Series",
+    "name": "PulseForge Series"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "BrainSAIT",
+    "url": "https://brainsait.de"
+  },
+  "url": "https://brainsait.de/my-novel/vol02.html",
+  "sameAs": [
+    "https://brainsait.cloud/my-novel/vol02.html"
+  ],
+  "clincallinc": {
+    "version": "1.0",
+    "lockedFacts": [
+      "Locked fact: tPA eligibility window is 4.5 hours (per ECASS III 2008). Wake-up stroke protocols and MRI perfusion criteria are required context for any extension beyond 4.5h.",
+      "Locked fact: The brain has approximately 86 billion neurons and 100 trillion synapses. No prose may claim higher figures for dramatic effect.",
+      "Locked fact: Broca's area = expressive aphasia (intact comprehension, impaired output). Wernicke's area = receptive aphasia (fluent but meaningless output). These are never conflated in prose.",
+      "Locked fact: Action potential velocity: myelinated A-alpha fibers = up to 120 m/s; unmyelinated C fibers = 0.5–2 m/s. The distinction matters for all pain physiology narratives.",
+      "Locked fact: BBB blocks ~98% of small molecules; essentially 0% of biologics (antibodies, gene vectors) cross without active transport. The 98% figure applies to small molecules only."
+    ]
+  }
+}
+    </script>
+    <link rel="canonical" href="https://brainsait.de/my-novel/vol02.html">
+    <link rel="alternate" hreflang="x-default" href="https://brainsait.cloud/my-novel/vol02.html">
+
+
+<body>
+<header role="banner" class="site-header">
+  <div class="header-logo">Synapse<em>Forge</em></div>
+  <nav class="header-nav"><a href="vol01.html">← Vol. 01</a><a href="index.html">All Volumes</a><a href="vol03.html">Vol. 03 →</a></nav>
+  <div class="header-tag">Vol. 02 · Neurology</div>
+</header>
+<main role="main">
+
+<div class="hero fade">
+  <div class="hero-vol">PulseForge Series · Volume 02 of 12</div>
+  <div class="hero-kicker">Neurology · BrainSAIT Cinematic Medical Novelist Engine</div>
+  <span class="hero-emoji">🧠</span>
+  <h1 class="hero-title">Synapse<em>Forge</em></h1>
+  <p class="hero-sub">Where neurons meet narratives.</p>
+  <p class="hero-sub-ar" lang="ar">رواية المشابك العصبية — حيث تلتقي الخلايا العصبية بالقصص</p>
+  <p class="hero-tagline">"The brain is not a computer. It is an unreliable narrator — brilliant, self-referential, and entirely capable of lying to you about what is happening to it."</p>
+  <p class="hero-tagline-ar" lang="ar">الدماغ ليس حاسوباً. إنه راوٍ غير موثوق — ذكي، ذاتي المرجعية، وقادر تماماً على الكذب عليك بشأن ما يحدث له.</p>
+  <div class="waveform-wrap">
+    <svg aria-hidden="true" focusable="false" class="waveform-svg" viewBox="0 0 900 60" preserveAspectRatio="none">
+      <polyline class="waveform-line" points="0,30 15,28 30,32 45,25 60,35 75,20 90,40 105,28 120,32 135,22 150,38 165,30 180,15 195,45 210,30 225,28 240,35 255,20 270,40 285,30 300,27 315,33 330,18 345,42 360,30 375,25 390,35 405,22 420,38 435,28 450,30 465,15 480,45 495,30 510,28 525,32 540,20 555,40 570,30 585,25 600,35 615,22 630,38 645,30 660,28 675,32 690,18 705,42 720,30 735,25 750,35 765,22 780,38 795,30 810,28 825,33 840,20 855,40 870,30 885,28 900,30"/>
+    </svg>
+  </div>
+  <div class="badge-row">
+    <span class="badge">EEG Waveform</span><span class="badge">Accent #7c3aed</span><span class="badge">Drama Temp 0.75</span><span class="badge">Psychological Thriller</span><span class="badge">Bilingual EN+AR</span>
+  </div>
+</div>
+
+<div class="page">
+
+<section class="fade">
+  <div class="sec-label">A — Product Vision</div>
+  <h2 class="sec-title">The brain<br><em>as protagonist.</em></h2>
+  <div class="bilingual"><div class="vision-block">
+    <p><strong>SynapseForge</strong> is the cinematic medical novelist engine for neurology — a tool that transforms the clinical language of action potentials, demyelination, and cerebrovascular accidents into prose that reads like a psychological thriller written by someone who has sat with both Oliver Sacks and Dostoevsky.</p>
+    <p>Neurology is the specialty where the organ being studied is also the organ doing the studying. The brain examining its own pathology creates an epistemological crisis no other specialty faces. SynapseForge honors this paradox by making the brain itself the narrator — unreliable, partial, sometimes deliberately misleading.</p>
+    <p><strong>SynapseForge does not explain the nervous system.</strong> It dramatizes the experience of a nervous system that is failing — and the clinical detective story of the physician who must diagnose a storyteller that cannot tell the truth about its own symptoms.</p>
+  </div>
+  <div class="vision-ar" lang="ar">
+    <p>SynapseForge هو محرك الروائي الطبي السينمائي لطب الأعصاب — أداة تحوّل اللغة السريرية لجهود الفعل والتحليل والحوادث الوعائية الدماغية إلى نثر يُقرأ كرواية بوليسية نفسية.</p>
+    <p>SynapseForge لا يشرح الجهاز العصبي. بل يُدرّج تجربة جهاز عصبي يفشل — وقصة المحقق السريري الذي يجب أن يشخّص راوياً لا يستطيع قول الحقيقة عن أعراضه الخاصة.</p>
+  </div></div>
+</section>
+
+<hr class="rule">
+
+<section class="fade">
+  <div class="sec-label">B — Three-Lens Transmutation</div>
+  <h2 class="sec-title">The neuron's<br><em>confession.</em></h2>
+
+  <div class="lens-card l1">
+    <div class="lens-label">Lens 1 — Dramatic · The Organ Has a Voice</div>
+    <div class="lens-fact">RAW FACT: In ischemic stroke, 1.9 million neurons die every minute of untreated occlusion. An action potential travels at up to 120 m/s — yet no signal can save what the clot has silenced.</div>
+    <div class="lens-en">
+      In the minute before the ambulance arrived, <strong>one million nine hundred thousand neurons died.</strong> Not metaphorically. Not approximately. Each one a tiny electrical city that went dark — a cluster of connections that will never fire again, a memory fragment, a motor pattern, a fragment of language, a piece of the accumulated self.<br><br>
+      The phrase "time is brain" was invented by neurologists who understood that precision matters in a crisis. But it is the kind of precision that protects the physician from the full weight of the arithmetic. Say it differently: every minute of delay is a library burning. And no one is coming to save the books that have already turned to ash.<br><br>
+      The brain, unlike any other organ, <em>knows</em> what it is losing. In the moments before the infarct silences the cortex, patients sometimes report a strange clarity — a sense that something irreplaceable is being taken. The brain writes its own elegy. The stroke is just the publisher.
+    </div>
+    <div class="div"></div>
+    <div class="lens-ar" lang="ar">في الدقيقة التي سبقت وصول سيارة الإسعاف، مات مليون وتسعمائة ألف خلية عصبية. ليس مجازاً. كل واحدة منها كانت مدينة كهربائية صغيرة انطفأت — شظية ذاكرة، نمط حركي، شظية لغة. الدماغ، على عكس أي عضو آخر، يعرف ما الذي يخسره. في اللحظات التي تسبق صمت القشرة، يكتب الدماغ رثاءه الخاص. والسكتة الدماغية هي مجرد الناشر.</div>
+  </div>
+
+  <div class="lens-card l2">
+    <div class="lens-label">Lens 2 — Eventful · The Seizure as Mutiny</div>
+    <div class="lens-fact">RAW FACT: Epileptic seizures result from hypersynchronous, high-amplitude neuronal discharge. The healthy brain is characterized by desynchrony — epilepsy is the pathological imposition of perfect order.</div>
+    <div class="lens-en">
+      Here is the paradox at the center of epilepsy: <strong>the seizure is not chaos. It is the opposite of chaos.</strong> The healthy brain is a democracy of asynchronous signals — a hundred billion neurons each doing their own thing, each firing at their own cadence, the noise of independence creating the coherence of thought.<br><br>
+      The seizure is a coup. A population of neurons — radicalized, synchronized, amplified — stops tolerating the democracy and begins broadcasting at the same frequency simultaneously. The electrical storm that results is not randomness. It is enforced unanimity. The brain, in a seizure, is marching in lockstep.<br><br>
+      The neurologist's job, when the EEG shows those massive synchronized spikes, is to find who started the march — to locate the focus, the original agitator — and decide whether to silence it with molecules, or go in and remove the revolutionary cell body entirely.
+    </div>
+    <div class="div"></div>
+    <div class="lens-ar" lang="ar">إليك المفارقة في قلب الصرع: النوبة ليست فوضى. إنها عكس الفوضى تماماً. الدماغ السليم ديمقراطية من الإشارات غير المتزامنة. النوبة انقلاب — مجموعة من الخلايا العصبية تتزامن وتبث على نفس التردد في آن واحد. مهمة طبيب الأعصاب: أن يجد من بدأ المسيرة، ويقرر ما إذا كان يُسكته بالجزيئات، أو يُزيل جسم الخلية الثورية كلياً.</div>
+  </div>
+
+  <div class="lens-card l3">
+    <div class="lens-label">Lens 3 — Hook · The Wall That Cannot Be Crossed</div>
+    <div class="lens-fact">RAW FACT: The blood-brain barrier prevents approximately 98% of small molecules and nearly all large molecules from entering the CNS — making drug delivery to the brain one of medicine's greatest unsolved problems.</div>
+    <div class="lens-en">
+      We have mapped the human genome. We have sent imaging machines into the deepest structures of the brain and returned with pictures so precise they show individual cortical layers. And yet, in the middle of all this capability, there stands a wall that medicine has spent fifty years trying to breach and largely cannot: <strong>the blood-brain barrier.</strong><br><br>
+      It is not a wall in the architectural sense. It is a biological philosophy — a decision made by evolution four hundred million years ago that the brain is too important to be accessible. The endothelial cells of the cerebral vasculature are so jealously selective that 98% of the drugs we develop for neurological disease cannot reach their target organ.<br><br>
+      Which means: we have treatments for Alzheimer's, for glioblastoma, for treatment-resistant depression — that work perfectly in a test tube, and cannot get through a vessel wall three cells thick. <em>The question is not whether we can design the molecule. It is whether we can ever deliver it.</em>
+    </div>
+    <div class="div"></div>
+    <div class="lens-ar" lang="ar">رسمنا خريطة الجينوم البشري وصوّرنا أعمق بنى الدماغ. ومع ذلك يقف جدار أمضت الطب خمسين عاماً في محاولة اختراقه: الحاجز الدموي الدماغي. إنه فلسفة بيولوجية — قرار اتخذه التطور بأن الدماغ مهم جداً ليكون في متناول أي شيء. 98% من الأدوية لا تصل إلى عضوها المستهدف. السؤال ليس ما إذا كنا نستطيع تصميم الجزيء. بل ما إذا كنا سنستطيع يوماً توصيله.</div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section class="fade">
+  <div class="sec-label">C — The Architect</div>
+  <h2 class="sec-title">Three acts.<br><em>One sentence dying.</em></h2>
+  <div class="act-grid">
+    <div class="act-cell">
+      <div class="act-num">Act I — The Symptom</div>
+      <div class="act-title">The Missing Word</div>
+      <div class="act-scene">"Professor Hamid was mid-lecture when he lost the word for 'beautiful.' He paused. Searched. Replaced it with 'good' and continued. His students noticed nothing. His wife, in the front row as always, noticed everything. She had heard him use that word ten thousand times. He had never fumbled it before."</div>
+      <div class="act-clinical">54-year-old male · Sudden word-finding difficulty<br>No headache, no weakness noted by patient<br>3 hours from onset to presentation</div>
+    </div>
+    <div class="act-cell">
+      <div class="act-num">Act II — The Diagnosis</div>
+      <div class="act-title">The Shadow in Broca's Area</div>
+      <div class="act-scene">"The MRI showed restricted diffusion in the left inferior frontal gyrus — Broca's area. The radiologist's report said: 'Acute ischemic infarct, 1.2 cm.' The neurologist read it and thought: the sentence is dying. The man still exists. The sentence is dying."</div>
+      <div class="act-clinical">MRI DWI: acute infarct left IFG<br>MRA: M2 branch left MCA occlusion<br>NIHSS: 4 · Within tPA window</div>
+    </div>
+    <div class="act-cell">
+      <div class="act-num">Act III — The Outcome</div>
+      <div class="act-title">tPA and the Return</div>
+      <div class="act-scene">"They gave the tPA at 11:47 AM — within the three-hour window. By 5 PM, he used the word 'beautiful' describing the afternoon light through the hospital window. Slightly effortful. The 'b' taking a fraction of a second longer than before. But there. Unmistakably there."</div>
+      <div class="act-clinical">IV tPA administered · NIHSS 4 → 1<br>No hemorrhagic conversion on follow-up MRI<br>Speech therapy initiated · Excellent prognosis</div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section class="fade">
+  <div class="sec-label">D — The Ghost Doctor</div>
+  <h2 class="sec-title">CLINICALLINC<br><em>guards every synapse.</em></h2>
+  <div class="ghost-block">
+    <div class="ghost-header">👻 CLINICALLINC · Neurology Accuracy Specifications</div>
+    <div class="ghost-row"><span class="ghost-check">✓</span><span class="ghost-text"><strong>Locked fact:</strong> tPA eligibility window is 4.5 hours (per ECASS III 2008). Wake-up stroke protocols and MRI perfusion criteria are required context for any extension beyond 4.5h.</span></div>
+    <div class="ghost-row"><span class="ghost-check">✓</span><span class="ghost-text"><strong>Locked fact:</strong> The brain has approximately 86 billion neurons and 100 trillion synapses. No prose may claim higher figures for dramatic effect.</span></div>
+    <div class="ghost-row"><span class="ghost-check">✓</span><span class="ghost-text"><strong>Locked fact:</strong> Broca's area = expressive aphasia (intact comprehension, impaired output). Wernicke's area = receptive aphasia (fluent but meaningless output). These are never conflated in prose.</span></div>
+    <div class="ghost-row"><span class="ghost-check">✓</span><span class="ghost-text"><strong>Locked fact:</strong> Action potential velocity: myelinated A-alpha fibers = up to 120 m/s; unmyelinated C fibers = 0.5–2 m/s. The distinction matters for all pain physiology narratives.</span></div>
+    <div class="ghost-row"><span class="ghost-check">✓</span><span class="ghost-text"><strong>Locked fact:</strong> BBB blocks ~98% of small molecules; essentially 0% of biologics (antibodies, gene vectors) cross without active transport. The 98% figure applies to small molecules only.</span></div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section class="fade">
+  <div class="sec-label">E — The Interface</div>
+  <h2 class="sec-title">The Alchemy<br><em>Studio.</em></h2>
+  <div class="iface-grid">
+    <div class="iface-card"><div class="iface-icon">🌊</div><div class="iface-title">EEG Visualization Layer</div><div class="iface-desc">Animated multi-channel EEG traces responsive to clinical content. Seizure chapters show synchronous spikes. Consciousness chapters show complex desynchrony. <em>The waveform is the emotional key signature of the prose.</em></div></div>
+    <div class="iface-card"><div class="iface-icon">🗺️</div><div class="iface-title">Brain Atlas Narrator</div><div class="iface-desc">An interactive coronal brain diagram where each structure — <em>hippocampus, Broca's area, thalamus, basal ganglia</em> — is a chapter. Click any region to enter its literary universe: function, failure mode, narrative voice.</div></div>
+    <div class="iface-card"><div class="iface-icon">🧩</div><div class="iface-title">Syndrome Builder</div><div class="iface-desc">Select a neurological syndrome — Parkinson's, MS, ALS, Huntington's — and the engine assembles a 3-Act narrative arc from symptom onset through diagnosis to outcome, clinically accurate and literarily devastating.</div></div>
+    <div class="iface-card"><div class="iface-icon">🔮</div><div class="iface-title">Unreliable Narrator Mode</div><div class="iface-desc">At Drama Temperature 1.0, the brain speaks in <em>first person</em> about its own deterioration. The prose shifts to present tense, to fragments, to silence. The form enacts the content.</div></div>
+    <div class="iface-card"><div class="iface-icon">🌐</div><div class="iface-title">Bilingual Consciousness</div><div class="iface-desc">Arabic output draws from the tradition of Arabic poetry about the mind — <em>al-Mutanabbi's descriptions of madness, Ibn Rushd's rationalism</em> — creating a cultural register that is native, not imported.</div></div>
+    <div class="iface-card"><div class="iface-icon">📊</div><div class="iface-title">NIHSS Narrative Translator</div><div class="iface-desc">Input any NIHSS score and the engine generates the human experience behind the number — what a score of 14 means in terms of lost function, lost language, lost identity — in prose families can read.</div></div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section class="fade">
+  <div class="sec-label">F — The Metrics</div>
+  <h2 class="sec-title">What success<br><em>looks like.</em></h2>
+  <div class="metrics-row">
+    <div class="metric"><div class="metric-n">86B</div><div class="metric-l">Neurons dramatized<br>per volume</div></div>
+    <div class="metric"><div class="metric-n">4.5h</div><div class="metric-l">tPA window preserved<br>in every story</div></div>
+    <div class="metric"><div class="metric-n">12</div><div class="metric-l">Neurological syndromes<br>per volume</div></div>
+    <div class="metric"><div class="metric-n">2</div><div class="metric-l">Languages · Literary<br>quality in both</div></div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section class="fade">
+  <div class="sec-label">G — The Library</div>
+  <h2 class="sec-title">Three novels.<br><em>The brain writes itself.</em></h2>
+  <div class="lib-grid">
+    <div class="novel-card">
+      <div class="novel-n">01</div>
+      <div>
+        <div class="novel-en">The Synapse Didn't Fail — It Hesitated</div>
+        <div class="novel-ar" lang="ar">المشبك لم يفشل — بل تردّد</div>
+        <div class="novel-p">Told from the perspective of a single synapse in Broca's area — from the day it first formed in a two-year-old's developing cortex, through sixty years of language, through the morning of the stroke, through the hours of tPA-mediated reperfusion, through the slow return of the word "beautiful." A love story between a neuron and its target.</div>
+        <div class="novel-tags"><span class="novel-tag">Ischemic Stroke</span><span class="novel-tag">First-Person Synapse</span><span class="novel-tag">Temp 1.0</span><span class="novel-tag">EN+AR</span></div>
+      </div>
+    </div>
+    <div class="novel-card">
+      <div class="novel-n">02</div>
+      <div>
+        <div class="novel-en">Sixty Hertz</div>
+        <div class="novel-ar" lang="ar">ستون هرتزاً</div>
+        <div class="novel-p">A neurology resident monitors a patient with refractory temporal lobe epilepsy — the region responsible for memory consolidation. The patient loses memories during every seizure. The resident begins to wonder: which version of this patient is the real one? The one who remembers, or the one who has just been reset?</div>
+        <div class="novel-tags"><span class="novel-tag">Epilepsy</span><span class="novel-tag">Temporal Lobe</span><span class="novel-tag">Temp 0.80</span><span class="novel-tag">Philosophical Thriller</span></div>
+      </div>
+    </div>
+    <div class="novel-card">
+      <div class="novel-n">03</div>
+      <div>
+        <div class="novel-en">The Longest Distance</div>
+        <div class="novel-ar" lang="ar">أطول مسافة</div>
+        <div class="novel-p">An ALS patient — a former marathon runner — narrates the progressive silencing of her motor neurons over eighteen months. Not as tragedy, but as a reckoning with what the body was, what it did, what it still contains. The last chapter is told entirely without verbs.</div>
+        <div class="novel-tags"><span class="novel-tag">ALS</span><span class="novel-tag">Motor Neuron Disease</span><span class="novel-tag">Temp 0.70</span><span class="novel-tag">Literary Memoir</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="vol-nav fade">
+  <a href="vol01.html">← Vol. 01 — PulseForge</a>
+  <a class="center" href="index.html">PulseForge Series</a>
+  <a href="vol03.html">Vol. 03 — BreathForge →</a>
+</div>
+</div>
+
+</main>
+<footer role="contentinfo">
+  <div class="footer-brand">Synapse<em>Forge</em></div>
+  <div class="footer-meta">Vol. 02 · Neurology<br>BrainSAIT × Cinematic Medical Novelist Engine v1.0<br>© 2025 BrainSAIT · All rights reserved</div>
+</footer>
+<script>
+const obs = new IntersectionObserver(entries => { entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('on'); }); }, { threshold:0.06 });
+document.querySelectorAll('.fade').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
