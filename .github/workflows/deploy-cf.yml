@@ -1,0 +1,25 @@
+name: Deploy to Cloudflare
+
+on:
+  workflow_dispatch:
+    inputs:
+      worker:
+        description: 'Worker name to deploy'
+        required: true
+        type: string
+
+jobs:
+  deploy:
+    runs-on: [self-hosted, brainsait]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install wrangler
+        run: npm install -g wrangler
+      - name: Deploy Worker
+        run: |
+          echo "Deploying worker: ${{ github.event.inputs.worker }}"
+          # Custom deploy logic here
+      - name: Notify Telegram
+        run: |
+          curl -s "https://api.telegram.org/bot8532100774:AAF9fMZg3Oucm8ugSAt7-4vxqI-kJn57rf8/sendMessage" \
+            -d "chat_id=2076569901&text=Deployed ${{ github.event.inputs.worker }} from CI"
